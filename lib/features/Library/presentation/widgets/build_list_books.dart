@@ -33,14 +33,6 @@ class BuildListBooks extends StatelessWidget {
               size: context.width / 6,
             ),
           ),
-          BuildListTileWidget(
-            titlel: 'Aqoidul Iman',
-            trailing: Icon(
-              Icons.menu_book_sharp,
-              color: AppColors.redDart,
-              size: context.width / 6,
-            ),
-          ),
         ],
       ),
     );

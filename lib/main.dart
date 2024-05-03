@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:free_lancer/features/home/presentation/cubit/PrayerCubit/prayer_cubit.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 import 'config/routes/routes.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => di.sl<QuranCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
         ),
       ],
       child: MaterialApp(

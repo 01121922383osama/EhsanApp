@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
-import 'api_enterseptor.dart';
-import 'status_code.dart';
 
 import '../../injection_container.dart' as di;
 import '../error/exceptions.dart';
 import 'api_consumer.dart';
+import 'api_enterseptor.dart';
 import 'end_point.dart';
+import 'status_code.dart';
 
 class DioConsumer implements ApiConsumerService {
   final Dio client;
@@ -37,8 +37,8 @@ class DioConsumer implements ApiConsumerService {
   }
 
   dynamic _handleResponseAsJson(Response<dynamic> response) {
-    final responseJson = jsonDecode(response.data.toString());
-    final surahs = responseJson['data']['surahs'];
+    final responseJson = jsonDecode(response.data);
+    final surahs = responseJson['data']['timings'];
     return surahs;
   }
 
