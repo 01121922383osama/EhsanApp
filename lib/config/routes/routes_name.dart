@@ -1,5 +1,6 @@
 class RoutesName {
   static const String oboardingscreen = '/';
+  static const String app = 'app';
   static const String homescreen = '/home_screen';
   static const String loginscreen = '/login_screen';
   static const String registerscreen = '/register_screen';
@@ -12,4 +13,7 @@ class RoutesName {
   static const String sebhaPage = '/sebha_page';
   static const String listenPage = '/listen_page';
   static const String audioPage = '/audio_page';
+  static const String aboutUs = '/about_us_page';
+  static const String hadith = '/hadith_page';
+  static const String doaa = '/doaa_us_page';
 }

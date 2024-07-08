@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:free_lancer/features/home/presentation/widgets/about_us.dart';
 
+import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_svg.dart';
 import '../../../Listen/presentation/widgets/build_menu_alshai5.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../../app/presentation/cubit/app_cubit.dart';
 
 class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,7 +17,6 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.elliptical(15, 15),
@@ -27,26 +28,24 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () => _openBottomSheet(context),
-                child: SvgPicture.asset(
-                  AssetsSvg.icon4,
-                ),
-              ),
-              state.index != 2
-                  ? IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.notifications_active),
-                    )
-                  : IconButton(
-                      onPressed: () {
-                        showSearch(
-                          context: context,
-                          delegate: SearchMoshaf(),
-                        );
-                      },
-                      icon: const Icon(Icons.search),
+              BlocBuilder<ThemeCubit, bool>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () =>
+                        context.pushNamed(pageRoute: RoutesName.aboutUs),
+                    child: SvgPicture.asset(
+                      AssetsSvg.icon4,
+                      colorFilter: ColorFilter.mode(
+                        context.read<ThemeCubit>().state
+                            ? AppColors.white
+                            : AppColors.black,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                  );
+                },
+              ),
+              _buildMenu(context, state),
             ],
           ),
         ),
@@ -58,38 +57,34 @@ class BuildAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size(double.infinity, 60);
 }
 
-void _openBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (context) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          children: [
-            SizedBox(
-              width: context.width / 2.3,
-              child: const AboutUsWidget(
-                image: AssetsSvg.osama,
-                name: 'Osama Nabil',
-                jobTitle: 'Flutter Developer',
-                description:
-                    '''This text is an example of text that can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts in addition to increasing the number of letters that the application generates.''',
-              ),
-            ),
-            const SizedBox(width: 5),
-            SizedBox(
-              width: context.width / 2.3,
-              child: const AboutUsWidget(
-                image: AssetsSvg.bilal,
-                name: 'Bilal Reda',
-                jobTitle: 'Ui / Ux Designer',
-                description:
-                    '''This text is an example of text that can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts in addition to increasing the number of letters that the application generates.''',
-              ),
-            ),
-          ],
-        ),
+Widget _buildMenu(BuildContext context, AppState state) {
+  switch (state.index) {
+    case 0:
+      return IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.notifications_active),
       );
-    },
-  );
+    case 1:
+      return IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.notifications_active),
+      );
+    case 2:
+      return IconButton(
+        onPressed: () {
+          showSearch(
+            context: context,
+            delegate: SearchMoshaf(),
+          );
+        },
+        icon: const Icon(Icons.search),
+      );
+    case 3:
+      return const TextButton(
+        onPressed: null,
+        child: Text(''),
+      );
+    default:
+      return const SizedBox.shrink();
+  }
 }

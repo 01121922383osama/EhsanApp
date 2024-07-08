@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utils/app_colors.dart';
+import '../widgets/search_delegate.dart';
 
-import '../../../../core/widgets/custom_search.dart';
-import '../../../../core/widgets/space_widget.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../widgets/build_sora_widget.dart';
 
@@ -17,11 +15,17 @@ class QuranPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              const BuildIconBackWidget(),
-              CustomSearchWidget(
-                hintText: 'Search for Surah...',
-                color: AppColors.grey.withOpacity(0.5),
-                onChanged: (value) {},
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const BuildIconBackWidget(),
+                  IconButton.filledTonal(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(context: context, delegate: SearchQuran());
+                    },
+                  ),
+                ],
               ),
               Expanded(
                 child: Scrollbar(
@@ -30,11 +34,13 @@ class QuranPage extends StatelessWidget {
                       overScroll.disallowIndicator();
                       return false;
                     },
-                    child: const CustomScrollView(
-                      physics: BouncingScrollPhysics(),
+                    child: CustomScrollView(
+                      primary: true,
+                      physics: const BouncingScrollPhysics(),
                       slivers: [
-                        SpaceWidget(height: 20),
-                        BuildSoraNamesWidget(),
+                        BuildSoraNamesWidget(
+                          quranList: quranList,
+                        ),
                       ],
                     ),
                   ),

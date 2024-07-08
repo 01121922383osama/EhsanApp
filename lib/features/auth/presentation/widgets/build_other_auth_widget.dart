@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/app_styles.dart';
 import '../../../../core/utils/assets_svg.dart';
 import 'build_auth_image.dart';
 
@@ -21,20 +22,16 @@ class BuildOtherSignInWithWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           children: [
-            Expanded(
+            const Expanded(
               child: Divider(),
             ),
             Text(
-              AppString.orSignInWith,
-              style: TextStyle(
-                color: AppColors.grey,
-                fontSize: 13,
-                fontWeight: FontWeight.normal,
-              ),
+              AppLocalizations.of(context)!.orSignInWith,
+              style: AppTextStyles.textStyleFont13,
             ),
-            Expanded(
+            const Expanded(
               child: Divider(),
             ),
           ],
@@ -49,33 +46,23 @@ class BuildOtherSignInWithWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 25),
-        const Text(
-          AppString.privacy,
-          style: TextStyle(
-            color: AppColors.grey,
-            fontSize: 13,
-            fontWeight: FontWeight.normal,
-          ),
+        Text(
+          AppLocalizations.of(context)!.privacy,
+          style: AppTextStyles.textStyleFont13,
         ),
         const SizedBox(height: 15),
         Text.rich(
+          textAlign: TextAlign.center,
           TextSpan(
             children: [
               TextSpan(
                 text: text1,
-                style: const TextStyle(
-                  color: AppColors.grey,
-                  fontSize: 13,
-                  fontWeight: FontWeight.normal,
-                ),
+                style: AppTextStyles.textStyleFont13,
               ),
               TextSpan(
                 text: text2,
-                style: const TextStyle(
-                  color: AppColors.red,
-                  fontSize: 13,
-                  fontWeight: FontWeight.normal,
-                ),
+                style: AppTextStyles.textStyleFont13
+                    .copyWith(color: AppColors.red),
                 recognizer: TapGestureRecognizer()..onTap = onTap,
               ),
             ],

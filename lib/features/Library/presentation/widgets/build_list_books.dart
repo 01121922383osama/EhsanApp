@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
@@ -13,24 +14,24 @@ class BuildListBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           BuildListTileWidget(
-            titlel: 'Al-Quran',
-            trailing: Icon(
+            titlel: AppLocalizations.of(context)!.holyQuran,
+            trailing: const Icon(
               CupertinoIcons.book,
               color: AppColors.redDart,
-              size: context.width / 6,
             ),
             onTap: () {
               context.pushNamed(pageRoute: RoutesName.quranPage);
             },
           ),
           BuildListTileWidget(
-            titlel: 'Al-Tafsir',
-            trailing: Icon(
+            titlel: AppLocalizations.of(context)!.tfsir,
+            trailing: const Icon(
               Icons.menu_book,
               color: AppColors.redDart,
-              size: context.width / 6,
             ),
           ),
         ],

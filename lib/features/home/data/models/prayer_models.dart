@@ -1,4 +1,4 @@
-import 'package:free_lancer/features/home/domain/entities/prayer_time_entity.dart';
+import '../../domain/entities/prayer_time_entity.dart';
 
 class PrayerTimeModel extends PrayerTimeEntity {
   const PrayerTimeModel({

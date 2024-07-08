@@ -16,3 +16,9 @@ final class PrayerSuccess extends PrayerState {
 
   const PrayerSuccess({required this.prayerTime});
 }
+
+final class PrayerFailure extends PrayerState {
+  final String messageError;
+
+  const PrayerFailure({required this.messageError});
+}

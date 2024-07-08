@@ -12,4 +12,12 @@ class AppColors {
   static const Color grey = Color(0xFF9E9E9E);
   static const Color lightgray = Color(0xFFD8DEFE);
   static const Color backgroundScaffold = Color(0xFFEEEEEE);
+  static const List<Color> paryersTime = [
+    Color(0xFFADD8E6),
+    Color(0xFFFFFF00),
+    Color(0xFFFFA500),
+    Color(0xFFFF4500),
+    Color(0xFF00008B),
+    Color(0xFF800080),
+  ];
 }

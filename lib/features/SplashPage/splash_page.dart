@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../config/routes/routes_name.dart';
 import '../../core/extension/extension.dart';
 import '../../core/utils/app_colors.dart';
@@ -15,7 +16,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 1900), () {
+    Future.delayed(const Duration(milliseconds: 1300), () {
       context.pushNamedAndRemoveUntil(pageRoute: RoutesName.loginscreen);
     });
     super.initState();

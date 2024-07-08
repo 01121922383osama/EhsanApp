@@ -1,8 +1,11 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/build_leading_widget.dart';
 import 'SebehCubit/sabeh_cubit.dart';
 import 'cubit/list_of_sabeh_cubit.dart';
@@ -22,8 +25,7 @@ class SebhaPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            title: const BuildIconBackWidget(),
+            leading: const BuildIconBackWidget(),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,8 +64,14 @@ class SebhaPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: CustomDropdown<String>(
-                            hintText: 'Choose the zikr',
+                            hintText: AppLocalizations.of(context)!.chooseZekr,
                             items: state.listOfSabeh,
+                            decoration: CustomDropdownDecoration(
+                              headerStyle: AppTextStyles.textStyleFont0Bold,
+                              listItemStyle: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
                             initialItem: state.listOfSabeh[0],
                             onChanged: (value) {
                               context
@@ -80,9 +88,7 @@ class SebhaPage extends StatelessWidget {
                             builder: (context, state) {
                               return Text(
                                 state.getValue,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                style: AppTextStyles.textStyleFont20.copyWith(
                                   color: AppColors.redDart,
                                 ),
                               );
@@ -94,9 +100,7 @@ class SebhaPage extends StatelessWidget {
                           builder: (context, state) {
                             return Text(
                               '$state',
-                              style: const TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
+                              style: AppTextStyles.textStyleFont30.copyWith(
                                 color: AppColors.redDart,
                               ),
                             );
@@ -129,12 +133,24 @@ class SebhaPage extends StatelessWidget {
                       getDouble: (p0) => getDouble1(p0),
                       iconData: Icons.add,
                     ),
-                    Positioned(
-                      top: context.height * 0.1,
-                      right: context.width * 0.1,
-                      child: AnimIconWidget(
-                        getDouble: (p0) => getDouble2(p0),
-                        iconData: Icons.remove,
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: AnimIconWidget(
+                          getDouble: (p0) => getDouble2(p0),
+                          iconData: Icons.remove,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: AnimIconWidget(
+                          getDouble: (p0) => getDouble2(p0),
+                          iconData: Icons.restart_alt,
+                        ),
                       ),
                     ),
                   ],

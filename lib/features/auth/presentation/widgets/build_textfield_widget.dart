@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/app_colors.dart';
 
@@ -14,8 +15,9 @@ class BuildTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(color: AppColors.black.withOpacity(0.5)),
       onTapOutside: (event) {
-        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus!.unfocus();
       },
       decoration: InputDecoration(
         border: const OutlineInputBorder(
@@ -33,7 +35,7 @@ class BuildTextFieldWidget extends StatelessWidget {
           inputAction ? TextInputAction.done : TextInputAction.next,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          return AppLocalizations.of(context)!.plzEnterSomeText;
         }
         return null;
       },

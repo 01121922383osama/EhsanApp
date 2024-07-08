@@ -49,8 +49,12 @@ class _AnimIconWidgetState extends State<AnimIconWidget>
         });
         if (widget.iconData == Icons.add) {
           BlocProvider.of<SabehCubit>(context).increment();
-        } else {
+        }
+        if (widget.iconData == Icons.remove) {
           BlocProvider.of<SabehCubit>(context).decrement();
+        }
+        if (widget.iconData == Icons.restart_alt) {
+          BlocProvider.of<SabehCubit>(context).reset();
         }
       },
       child: AnimatedBuilder(

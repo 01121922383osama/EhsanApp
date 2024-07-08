@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 
-import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_svg.dart';
 import '../../../../core/widgets/custom_icon_widget.dart';
 import '../widgets/build_text_widget.dart';
@@ -27,12 +26,12 @@ class ForGetPasswordPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const BuildTextWidget(
-                    text1: AppString.forgotPassword,
-                    text2: AppString.contentPassword,
+                  BuildTextWidget(
+                    text1: AppLocalizations.of(context)!.forgotPassword,
+                    text2: AppLocalizations.of(context)!.contentPassword,
                   ),
-                  const BuildTextFieldWidget(
-                    hintText: AppString.emailOrPhoneNumber,
+                  BuildTextFieldWidget(
+                    hintText: AppLocalizations.of(context)!.emailOrPhoneNumber,
                   ),
                   const SizedBox(height: 10),
                   Align(
@@ -43,7 +42,7 @@ class ForGetPasswordPage extends StatelessWidget {
                         AppColors.red,
                         BlendMode.modulate,
                       ),
-                      height: context.width * 0.3,
+                      height: 100,
                     ),
                   ),
                   SvgPicture.asset(
@@ -52,10 +51,10 @@ class ForGetPasswordPage extends StatelessWidget {
                       AppColors.red,
                       BlendMode.modulate,
                     ),
-                    height: context.width * 0.6,
+                    height: 250,
                   ),
                   CustomIconButton(
-                    textButton: AppString.forgotPassword,
+                    textButton: AppLocalizations.of(context)!.forgotPassword,
                     onPressed: () {},
                   ),
                 ],

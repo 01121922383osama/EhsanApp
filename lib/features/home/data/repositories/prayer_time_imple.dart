@@ -1,8 +1,11 @@
-import 'package:free_lancer/core/Network/network_info.dart';
-import 'package:free_lancer/features/home/data/datasources/prayer_local_datasource.dart';
-import 'package:free_lancer/features/home/data/datasources/prayer_remote_datasource.dart';
-import 'package:free_lancer/features/home/domain/entities/prayer_time_entity.dart';
-import 'package:free_lancer/features/home/domain/repositories/prayer_time_repo.dart';
+import '../../../../core/utils/app_strings.dart';
+import 'package:hive/hive.dart';
+
+import '../../../../core/Network/network_info.dart';
+import '../../domain/entities/prayer_time_entity.dart';
+import '../../domain/repositories/prayer_time_repo.dart';
+import '../datasources/prayer_local_datasource.dart';
+import '../datasources/prayer_remote_datasource.dart';
 
 class PrayerTimeImple implements PrayerTimeRepo {
   final PrayerRemoteDataSource remoteDataSource;
@@ -14,12 +17,28 @@ class PrayerTimeImple implements PrayerTimeRepo {
     required this.localDataSource,
     required this.networkInfo,
   });
+
   @override
   Future<PrayerTimeEntity> getPrayerTime() async {
-    if (await networkInfo.isConnected) {
-      return await remoteDataSource.getPrayerTime();
+    var box = Hive.box<PrayerTimeEntity>(AppString.keyPrayerTime);
+    if (box.isEmpty) {
+      final prayerTime = await remoteDataSource.getPrayerTime();
+      saveBooksData(
+        prayerData: prayerTime,
+        boxName: AppString.keyPrayerTime,
+      );
+      return prayerTime;
     } else {
-      return await localDataSource.getPrayerTime();
+      final localData = await localDataSource.getPrayerTime();
+      return localData.first;
     }
   }
+}
+
+void saveBooksData({
+  required PrayerTimeEntity prayerData,
+  required String boxName,
+}) {
+  var box = Hive.box<PrayerTimeEntity>(boxName);
+  box.add(prayerData);
 }

@@ -1,6 +1,6 @@
 part of 'list_of_sabeh_cubit.dart';
 
-sealed class ListOfSabehState extends Equatable {
+abstract class ListOfSabehState extends Equatable {
   final List<String> listOfSabeh;
   final String getValue;
 
@@ -10,10 +10,7 @@ sealed class ListOfSabehState extends Equatable {
   List<Object> get props => [listOfSabeh, getValue];
 }
 
-final class ListOfSabehInitial extends ListOfSabehState {
+class ListOfSabehInitial extends ListOfSabehState {
   const ListOfSabehInitial(
       {required super.listOfSabeh, required super.getValue});
-
-  @override
-  List<Object> get props => [listOfSabeh, getValue];
 }

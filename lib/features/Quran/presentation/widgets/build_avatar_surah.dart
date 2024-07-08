@@ -15,6 +15,9 @@ class BuildAvatarNumber extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         FittedBox(
+          alignment: AlignmentDirectional.center,
+          clipBehavior: Clip.none,
+          fit: BoxFit.scaleDown,
           child: Text(
             '${index + 1}',
             style: const TextStyle(
@@ -25,6 +28,7 @@ class BuildAvatarNumber extends StatelessWidget {
         ),
         SvgPicture.asset(
           AssetsSvg.verse,
+          height: 35,
         ),
       ],
     );

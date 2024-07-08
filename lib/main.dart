@@ -1,25 +1,19 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/home/presentation/cubit/PrayerCubit/prayer_cubit.dart';
-import 'package:just_audio_background/just_audio_background.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/features/home/presentation/pages/Hadith/cubit/azkar_cubit.dart';
 
 import 'config/routes/routes.dart';
 import 'config/routes/routes_name.dart';
 import 'config/theme/app_theme.dart';
-import 'features/Listen/presentation/cubit/listen_cubit.dart';
-import 'features/Quran/presentation/cubit/quran_cubit.dart';
+import 'features/Setting/presentation/cubit/Lang/change_language_cubit.dart';
+import 'features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 import 'features/app/presentation/cubit/app_cubit.dart';
 import 'injection_container.dart' as di;
 
-Future<void> main() async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
   runApp(const MyApp());
 }
 
@@ -28,28 +22,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AppCubit(),
+    return BlocProvider(
+      create: (context) => AzkarCubit()..getZekrData(),
+      child: BlocProvider(
+        create: (context) => AppCubit(),
+        child: BlocProvider(
+          create: (context) => ChangeLanguageCubit(),
+          child: BlocProvider(
+            create: (context) => ThemeCubit(),
+            child: BlocBuilder<ThemeCubit, bool>(
+              builder: (context, state) {
+                return BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
+                  builder: (context, lang) {
+                    return MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      darkTheme: ThemeData.dark(useMaterial3: true),
+                      themeMode: state ? ThemeMode.dark : ThemeMode.light,
+                      theme: AppTheme.themeData,
+                      locale: Locale(lang.lang),
+                      localizationsDelegates:
+                          AppLocalizations.localizationsDelegates,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      initialRoute: RoutesName.oboardingscreen,
+                      onGenerateRoute: AppRoute.onGenerateRoute,
+                      onUnknownRoute: AppRoute.onUnknownRoute,
+                    );
+                  },
+                );
+              },
+            ),
+          ),
         ),
-        BlocProvider(
-          create: (context) => ListenCubit(),
-        ),
-        BlocProvider(
-          create: (context) => di.sl<QuranCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'إحـسـان',
-        theme: AppTheme.themeData,
-        initialRoute: RoutesName.oboardingscreen,
-        onGenerateRoute: AppRoute.onGenerateRoute,
-        onUnknownRoute: AppRoute.onUnknownRoute,
       ),
     );
   }

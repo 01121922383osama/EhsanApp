@@ -7,17 +7,19 @@ abstract class QuranState extends Equatable {
   List<Object> get props => [];
 }
 
-class QuranInitial extends QuranState {}
+class QuranInitial extends QuranState {
+  const QuranInitial();
+  @override
+  List<Object> get props => [];
+}
 
 class QuranLoading extends QuranState {}
 
 class QuranSuccess extends QuranState {
-  final List<SurahEntity> surah;
-
-  const QuranSuccess({required this.surah});
+  const QuranSuccess();
 
   @override
-  List<Object> get props => [surah];
+  List<Object> get props => [];
 }
 
 class QuranFailure extends QuranState {

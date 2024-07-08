@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:free_lancer/core/utils/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/extension/extension.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
+import '../../../../core/widgets/build_leading_widget.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class AboutUsWidget extends StatelessWidget {
-  final String image;
   final String name;
   final String jobTitle;
   final String description;
@@ -13,16 +18,18 @@ class AboutUsWidget extends StatelessWidget {
     required this.name,
     required this.jobTitle,
     required this.description,
-    required this.image,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(10),
       alignment: Alignment.center,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.4),
+        color: context.read<ThemeCubit>().state
+            ? AppColors.white.withOpacity(0.4)
+            : AppColors.grey.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -42,44 +49,40 @@ class AboutUsWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Card(
             elevation: 0.5,
             color: AppColors.white.withOpacity(0.8),
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 50,
-                  child: SvgPicture.asset(
-                    image,
-                  ),
                 ),
                 Text(
                   name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                  style: AppTextStyles.textStyleFont20.copyWith(
                     color: AppColors.black,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   jobTitle,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
+                  style: AppTextStyles.textStyleFont15.copyWith(
                     color: AppColors.black,
                   ),
                 ),
               ],
             ),
           ),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.normal,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              description,
+              style: AppTextStyles.textStyleFont15.copyWith(
+                color: AppColors.black,
+              ),
             ),
           ),
           Row(
@@ -88,15 +91,58 @@ class AboutUsWidget extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.call),
+                icon: const Icon(
+                  Icons.call,
+                  color: Colors.blue,
+                ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(CupertinoIcons.chat_bubble_fill),
+                icon: const Icon(
+                  CupertinoIcons.chat_bubble_fill,
+                  color: Colors.green,
+                ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AboutUsPage extends StatelessWidget {
+  const AboutUsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity! > 0) {
+          context.pop();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const BuildIconBackWidget(),
+          title: Text(AppLocalizations.of(context)!.about),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              AboutUsWidget(
+                name: AppLocalizations.of(context)!.nameOsama,
+                jobTitle: AppLocalizations.of(context)!.jobTitleOsama,
+                description: AppLocalizations.of(context)!.descriptionOsama,
+              ),
+              AboutUsWidget(
+                name: AppLocalizations.of(context)!.nameBilal,
+                jobTitle: AppLocalizations.of(context)!.jobTitleBilal,
+                description: AppLocalizations.of(context)!.descriptionBilal,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

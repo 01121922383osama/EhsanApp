@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../../../../core/utils/app_styles.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -26,18 +27,12 @@ class BuildTextWidget extends StatelessWidget {
         children: [
           Text(
             text1,
-            style: const TextStyle(
-              color: AppColors.darkBlue,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyles.textStyleFont30,
           ),
           Text(
             text2,
-            style: TextStyle(
+            style: AppTextStyles.textStyleFont15.copyWith(
               color: AppColors.black.withOpacity(0.5),
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
             ),
           ),
         ],

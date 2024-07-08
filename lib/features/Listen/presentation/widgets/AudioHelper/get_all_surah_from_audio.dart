@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../Quran/presentation/widgets/leading_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
+
+import '../../../../Quran/presentation/widgets/leading_widget.dart';
+import '../../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class GetAllSurahWidget extends StatelessWidget {
   final AudioPlayer audioPlayer;
@@ -13,29 +16,35 @@ class GetAllSurahWidget extends StatelessWidget {
       builder: (context, snapshot) {
         final state = snapshot.data;
         final sequence = state?.sequence ?? [];
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: sequence.length,
-            itemBuilder: (context, index) {
-              return Material(
-                color:
-                    index == state!.currentIndex ? Colors.grey.shade300 : null,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: ListTile(
-                    leading: LeadingWidget(index: index),
-                    title: Text(sequence[index].tag.title as String),
-                    onTap: () {
-                      audioPlayer.seek(Duration.zero, index: index);
-                    },
+        return ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: sequence.length,
+          itemBuilder: (context, index) {
+            return BlocBuilder<ThemeCubit, bool>(
+              builder: (context, theme) {
+                return Material(
+                  color: theme
+                      ? index == state!.currentIndex
+                          ? Colors.grey.withOpacity(0.2)
+                          : null
+                      : index == state!.currentIndex
+                          ? Colors.grey.shade300
+                          : null,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: ListTile(
+                      leading: LeadingWidget(index: index),
+                      title: Text(sequence[index].tag.title as String),
+                      onTap: () {
+                        audioPlayer.seek(Duration.zero, index: index);
+                      },
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
+                );
+              },
+            );
+          },
         );
       },
     );

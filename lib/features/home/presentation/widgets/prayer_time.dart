@@ -1,110 +1,124 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/core/utils/app_colors.dart';
-import 'package:free_lancer/features/home/presentation/cubit/PrayerCubit/prayer_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../core/functions/remaining_time.dart';
+import '../../../../core/utils/app_styles.dart';
+import '../cubit/PrayerCubit/prayer_cubit.dart';
+import 'anim_prayer_time.dart';
 
 class PrayerTime extends StatelessWidget {
   const PrayerTime({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          const Text(
-            'Prayer Times in  Cairo',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          GridView(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              childAspectRatio: 1.5,
-            ),
-            cacheExtent: 10000,
-            children: [
-              for (int i = 0; i < 6; i++)
-                BlocBuilder<PrayerCubit, PrayerState>(
-                  builder: (context, state) {
-                    if (state is PrayerLoading) {
-                      return const SizedBox.shrink();
-                    } else if (state is PrayerSuccess) {
-                      final List<DateTime> time = [
-                        state.prayerTime.fajr,
-                        state.prayerTime.sunrise,
-                        state.prayerTime.dhuhr,
-                        state.prayerTime.asr,
-                        state.prayerTime.maghrib,
-                        state.prayerTime.isha,
-                      ];
-                      return Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(8),
-                        margin: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.lightblue,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: AppColors.lightgray,
-                              spreadRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _arabicPrayer[i],
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              '(  ${DateFormat().add_jmz().format(time[i])}  )',
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+    return SliverList.builder(
+      itemCount: 6,
+      itemBuilder: (context, index) {
+        return BlocBuilder<PrayerCubit, PrayerState>(
+          builder: (context, state) {
+            if (state is PrayerSuccess) {
+              final List<DateTime> time = [
+                state.prayerTime.fajr,
+                state.prayerTime.sunrise,
+                state.prayerTime.dhuhr,
+                state.prayerTime.asr,
+                state.prayerTime.maghrib,
+                state.prayerTime.isha,
+              ];
+              List<String> images = [
+                'assets/images/fajr.png',
+                'assets/images/shrooq.png',
+                'assets/images/zhur.png',
+                'assets/images/asr.png',
+                'assets/images/magrib.png',
+                'assets/images/isyah.png',
+              ];
+              return AnimPrayerTime(
+                index: index,
+                image: images[index],
+                time: DateFormat().add_jmz().format(time[index]),
+                prayerName: _arabicPrayer(context)[index],
+                widget: StreamBuilder(
+                  stream: remainingTime(time[index]),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        '  ${snapshot.data}',
+                        style: AppTextStyles.textStyleFont16,
                       );
                     } else {
-                      return const SizedBox.shrink();
+                      return const SizedBox();
                     }
                   },
                 ),
-            ],
-          ),
-        ],
-      ),
+              );
+            } else {
+              return Center(
+                child: Text(AppLocalizations.of(context)!.loading),
+              );
+            }
+          },
+        );
+      },
     );
   }
 }
 
-// List<String> _prayer = [
-//   'Fajr',
-//   'Sunrise',
-//   'Dhuhr',
-//   'Asr',
-//   'Maghrib',
-//   'Isha',
-// ];
-List<String> _arabicPrayer = [
-  'الفجر',
-  'الشروق',
-  'الظهر',
-  'العصر',
-  'المغرب',
-  'العشاء',
-];
+List<String> _arabicPrayer(BuildContext context) => [
+      AppLocalizations.of(context)!.fajr,
+      AppLocalizations.of(context)!.sunrise,
+      AppLocalizations.of(context)!.dhuhr,
+      AppLocalizations.of(context)!.asr,
+      AppLocalizations.of(context)!.maghrib,
+      AppLocalizations.of(context)!.isha,
+    ];
+
+/*
+Card(
+                elevation: 0.5,
+                color: context.read<ThemeCubit>().state
+                    ? AppColors.white.withOpacity(0.7)
+                    : null,
+                child: ListTile(
+                  title: Text(
+                    _arabicPrayer(context)[index],
+                    style: const TextStyle(
+                      color: AppColors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '(  ${DateFormat().add_jmz().format(time[index])} )',
+                        style: const TextStyle(
+                          color: AppColors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      StreamBuilder(
+                        stream: remainingTime(time[index]),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              '  ${snapshot.data}',
+                              style: const TextStyle(
+                                color: AppColors.black,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+*/

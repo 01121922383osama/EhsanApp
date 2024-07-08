@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:quran/quran.dart' as quran;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../../data/models/quran_list_model.dart';
 import '../pages/surah_page.dart';
 import 'leading_widget.dart';
 import 'subtitle_widget.dart';
 
 class BuildSoraNamesWidget extends StatelessWidget {
-  const BuildSoraNamesWidget({super.key});
+  final List<QuranList> quranList;
+  const BuildSoraNamesWidget({super.key, required this.quranList});
 
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
-      itemCount: quran.totalSurahCount,
+      itemCount: quranList.length,
       itemBuilder: (context, index) {
+        final quran = quranList[index];
         return Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -22,20 +26,32 @@ class BuildSoraNamesWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 5),
           child: ListTile(
             leading: LeadingWidget(index: index),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(
+                color: context.read<ThemeCubit>().state
+                    ? AppColors.white.withOpacity(0.5)
+                    : AppColors.white,
+              ),
+            ),
             title: Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
-                    text: quran.getSurahName(index + 1),
-                    style: const TextStyle(
-                      color: AppColors.black,
+                    text: quran.surahEnglish,
+                    style: TextStyle(
+                      color: context.read<ThemeCubit>().state
+                          ? AppColors.white
+                          : AppColors.black,
                       fontSize: 14,
                     ),
                   ),
                   TextSpan(
-                    text: ' (${quran.getSurahNameEnglish(index + 1)})',
-                    style: const TextStyle(
-                      color: AppColors.redDart,
+                    text: ' (${quran.describeSurah})',
+                    style: TextStyle(
+                      color: context.read<ThemeCubit>().state
+                          ? AppColors.white
+                          : AppColors.redDart,
                       fontSize: 10,
                     ),
                   ),
@@ -43,14 +59,14 @@ class BuildSoraNamesWidget extends StatelessWidget {
               ),
             ),
             subtitle: SubTitelWidget(
-              surahName: quran.getSurahNameArabic(index + 1),
-              manyAyah: quran.getVerseCount(index + 1),
-              revelationType: quran.getPlaceOfRevelation(index + 1),
+              surahName: quran.surahArabic!,
+              manyAyah: quran.manyAyah!,
+              revelationType: quran.describeSurah!,
             ),
             onTap: () {
               context.push(
                 widget: SurahPage(
-                  suraName: quran.getSurahNameArabic(index + 1),
+                  suraName: quran.surahArabic,
                   indexOfSurah: index,
                 ),
               );

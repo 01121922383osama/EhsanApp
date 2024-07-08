@@ -19,7 +19,7 @@ extension NavigatorToPage on BuildContext {
   void pushReplacement({required Widget widget}) {
     Navigator.pushReplacement(
       this,
-      MaterialPageRoute(builder: (context) => widget),
+      SlideToLeft(page: widget),
     );
   }
 

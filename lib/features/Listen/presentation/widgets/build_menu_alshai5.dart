@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../Quran/presentation/widgets/leading_widget.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/datasources/LocalDataSourceShaikh/export.dart';
 import '../../data/models/models_urls.dart';
 import '../pages/build_audio_page.dart';
@@ -13,20 +16,25 @@ class BuildMenuShai5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scrollbar(
-          child: ListView.separated(
-            padding: EdgeInsets.only(bottom: context.width * 0.25),
-            itemBuilder: (context, index) {
-              return const Divider(
-                color: AppColors.darkBlue,
-                thickness: 0.3,
-              );
-            },
-            itemCount: _list.length + 1,
-            separatorBuilder: (context, index) {
-              return ListTile(
+      child: Scrollbar(
+        child: ListView.builder(
+          padding: EdgeInsets.only(bottom: context.width * 0.25),
+          primary: true,
+          itemCount: _list.length,
+          itemBuilder: (context, index) {
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: context.read<ThemeCubit>().state
+                        ? AppColors.white.withOpacity(0.5)
+                        : AppColors.white,
+                  ),
+                ),
                 onTap: () {
                   context.push(
                     widget: BuildAudioPage(
@@ -36,9 +44,9 @@ class BuildMenuShai5 extends StatelessWidget {
                 },
                 leading: LeadingWidget(index: index),
                 title: Text(_list[index][index].title1),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -159,7 +167,7 @@ class SearchMoshaf extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        tooltip: 'Clear',
+        tooltip: AppLocalizations.of(context)!.clear,
       ),
     ];
   }
@@ -171,7 +179,7 @@ class SearchMoshaf extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      tooltip: 'Back',
+      tooltip: AppLocalizations.of(context)!.back,
     );
   }
 
@@ -186,30 +194,27 @@ class SearchMoshaf extends SearchDelegate {
         }
       }
     }
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          return const Divider(
-            color: AppColors.darkBlue,
-            thickness: 0.3,
-          );
-        },
-        itemCount: result.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              context.pushReplacement(
-                widget: BuildAudioPage(
-                  audioUrl: result[index],
-                ),
-              );
-            },
-            leading: LeadingWidget(index: index),
-            title: Text(result[index][0].title1),
-          );
-        },
-      ),
+    return ListView.separated(
+      separatorBuilder: (context, index) {
+        return const Divider(
+          color: AppColors.darkBlue,
+          thickness: 0.3,
+        );
+      },
+      itemCount: result.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            context.pushReplacement(
+              widget: BuildAudioPage(
+                audioUrl: result[index],
+              ),
+            );
+          },
+          leading: LeadingWidget(index: index),
+          title: Text(result[index][0].title1),
+        );
+      },
     );
   }
 
@@ -224,30 +229,27 @@ class SearchMoshaf extends SearchDelegate {
         }
       }
     }
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          return const Divider(
-            color: AppColors.darkBlue,
-            thickness: 0.3,
-          );
-        },
-        itemCount: suggestions.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              context.pushReplacement(
-                widget: BuildAudioPage(
-                  audioUrl: suggestions[index],
-                ),
-              );
-            },
-            leading: LeadingWidget(index: index),
-            title: Text(suggestions[index][0].title1),
-          );
-        },
-      ),
+    return ListView.separated(
+      separatorBuilder: (context, index) {
+        return const Divider(
+          color: AppColors.darkBlue,
+          thickness: 0.3,
+        );
+      },
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            context.pushReplacement(
+              widget: BuildAudioPage(
+                audioUrl: suggestions[index],
+              ),
+            );
+          },
+          leading: LeadingWidget(index: index),
+          title: Text(suggestions[index][0].title1),
+        );
+      },
     );
   }
 }

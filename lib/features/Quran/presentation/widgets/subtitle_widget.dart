@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_svg.dart';
@@ -35,7 +36,7 @@ class SubTitelWidget extends StatelessWidget {
               ),
             ),
             CircleWidget(
-              text: '$manyAyah Ayat ',
+              text: '$manyAyah ${AppLocalizations.of(context)!.ayat} ',
               svgImage: AssetsSvg.smallBook,
             ),
           ],

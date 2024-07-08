@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../cubit/listen_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../widgets/build_first_widget.dart';
 import '../widgets/build_menu_alshai5.dart';
 
@@ -9,30 +13,39 @@ class ListenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overScroll) {
-            overScroll.disallowIndicator();
-            return false;
-          },
-          child: const CustomScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            slivers: [
-              BuildFirstWidget(),
-              SliverToBoxAdapter(
-                child: Text(
-                  'Most Popular',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
+    return BlocProvider(
+       create: (context) => ListenCubit(),
+      child: Scaffold(
+        backgroundColor: context.read<ThemeCubit>().state
+            ? AppColors.black.withOpacity(0.2)
+            : null,
+        body: Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overScroll) {
+              overScroll.disallowIndicator();
+              return false;
+            },
+            child: CustomScrollView(
+              primary: true,
+              physics: const NeverScrollableScrollPhysics(),
+              slivers: [
+                const BuildFirstWidget(),
+                SliverToBoxAdapter(
+                  child: Text(
+                    AppLocalizations.of(context)!.popular,
+                    style: TextStyle(
+                      color: context.read<ThemeCubit>().state
+                          ? AppColors.white
+                          : AppColors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-              ),
-              BuildMenuShai5(),
-            ],
+                const BuildMenuShai5(),
+              ],
+            ),
           ),
         ),
       ),

@@ -7,7 +7,10 @@ import '../../features/SplashPage/splash_page.dart';
 import '../../features/auth/presentation/pages/forget_password_page.dart';
 import '../../features/auth/presentation/pages/login_screen.dart';
 import '../../features/auth/presentation/pages/register_screen.dart';
+import '../../features/home/presentation/pages/Doaa/doaa_page.dart';
+import '../../features/home/presentation/pages/Hadith/hadith_page.dart';
 import '../../features/home/presentation/pages/Sebha/sebha_page.dart';
+import '../../features/home/presentation/widgets/about_us.dart';
 import '../Animations/slide_left.dart';
 import 'routes_name.dart';
 
@@ -21,8 +24,7 @@ class AppRoute {
       case RoutesName.registerscreen:
         return SlideToLeft(page: const RegisterPage());
       case RoutesName.forgetpasswordscreen:
-        return MaterialPageRoute(
-            builder: (context) => const ForGetPasswordPage());
+        return SlideToLeft(page: const ForGetPasswordPage());
       case RoutesName.quranPage:
         return SlideToLeft(page: const QuranPage());
       case RoutesName.surahPage:
@@ -31,6 +33,12 @@ class AppRoute {
         return SlideToLeft(page: const SebhaPage());
       case RoutesName.audioPage:
         return SlideToLeft(page: const BuildAudioPage());
+      case RoutesName.aboutUs:
+        return SlideToLeft(page: const AboutUsPage());
+      case RoutesName.hadith:
+        return SlideToLeft(page: const HadithPage());
+      case RoutesName.doaa:
+        return SlideToLeft(page: const DoaaPage());
 
       default:
         return onUnknownRoute(settings)!;

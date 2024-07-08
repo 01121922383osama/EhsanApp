@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/app_styles.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class BuildIconWidget extends StatelessWidget {
   final String image;
@@ -16,7 +19,9 @@ class BuildIconWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.read<ThemeCubit>().state
+              ? AppColors.white.withOpacity(0.5)
+              : AppColors.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -42,11 +47,7 @@ class BuildIconWidget extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               text,
-              style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: AppColors.red,
-              ),
+              style: AppTextStyles.textStyleFont10,
             ),
           ],
         ),

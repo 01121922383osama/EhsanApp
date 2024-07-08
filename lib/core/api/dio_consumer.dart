@@ -37,9 +37,19 @@ class DioConsumer implements ApiConsumerService {
   }
 
   dynamic _handleResponseAsJson(Response<dynamic> response) {
-    final responseJson = jsonDecode(response.data);
-    final surahs = responseJson['data']['timings'];
-    return surahs;
+    if (response.data != null &&
+        response.data is String &&
+        response.data.trim().isNotEmpty) {
+      try {
+        final responseJson = jsonDecode(response.data);
+        final surahs = responseJson['data']['timings'];
+        return surahs;
+      } catch (e) {
+        return response.data;
+      }
+    } else {
+      return response.data;
+    }
   }
 
   dynamic _handleDioError(DioException error) {
@@ -71,7 +81,6 @@ class DioConsumer implements ApiConsumerService {
       case DioExceptionType.unknown:
         throw const NoInterNetConnectionException();
     }
-    // Return null if error is not handled
     return null;
   }
 
@@ -79,7 +88,12 @@ class DioConsumer implements ApiConsumerService {
   Future<dynamic> get({String? url}) async {
     try {
       final response = await client.get(url!);
-      return _handleResponseAsJson(response);
+      if (response.statusCode == 302) {
+        final redirectUrl = response.headers['location']!.first;
+        return get(url: redirectUrl);
+      } else {
+        return _handleResponseAsJson(response);
+      }
     } on DioException catch (error) {
       throw _handleDioError(error);
     }

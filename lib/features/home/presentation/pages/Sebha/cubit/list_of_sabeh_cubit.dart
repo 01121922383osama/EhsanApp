@@ -19,7 +19,7 @@ class ListOfSabehCubit extends Cubit<ListOfSabehState> {
 const List<String> _list = [
   'سبحان الله',
   'الحمد لله',
-  'لا اله الا الله',
   'الله اكبر',
+  'لا اله الا الله',
   'لا حول ولا قوة الا بالله',
 ];

@@ -1,5 +1,7 @@
-import 'package:free_lancer/core/api/api_consumer.dart';
-import 'package:free_lancer/features/home/data/models/prayer_models.dart';
+import 'package:intl/intl.dart';
+
+import '../../../../core/api/api_consumer.dart';
+import '../models/prayer_models.dart';
 
 abstract class PrayerRemoteDataSource {
   Future<PrayerTimeModel> getPrayerTime();
@@ -11,9 +13,11 @@ class PrayerRemoteDataSourceImpl implements PrayerRemoteDataSource {
   PrayerRemoteDataSourceImpl({required this.apiConsumerService});
   @override
   Future<PrayerTimeModel> getPrayerTime() async {
+    final currentDate = DateTime.now();
+    final formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
     final response = await apiConsumerService.get(
         url:
-            'https://api.aladhan.com/v1/timingsByAddress/05-03-2024?address=cairo');
+            'http://api.aladhan.com/v1/timingsByAddress/$formattedDate?address=cairo');
     return PrayerTimeModel.fromJson(response);
   }
 }

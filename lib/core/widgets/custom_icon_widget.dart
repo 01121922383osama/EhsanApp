@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/app_styles.dart';
 
 import '../extension/extension.dart';
 import '../utils/app_colors.dart';
@@ -19,15 +20,12 @@ class CustomIconButton extends StatelessWidget {
         ),
         elevation: 0,
         shadowColor: Colors.transparent,
-        textStyle: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        textStyle: AppTextStyles.textStyleFont20,
         foregroundColor: AppColors.white,
         padding: const EdgeInsets.all(0),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.center,
-        minimumSize: Size(context.width * 0.9, context.width * 0.150),
+        minimumSize: Size(context.width * 0.9, 65),
       ),
       onPressed: onPressed,
       child: Text(textButton),
