@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -59,20 +60,20 @@ class AboutUsWidget extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 50,
-                ),
+                ).animate().shimmer(),
                 Text(
                   name,
                   style: AppTextStyles.textStyleFont20.copyWith(
                     color: AppColors.black,
                   ),
-                ),
+                ).animate().rotate(),
                 const SizedBox(height: 5),
                 Text(
                   jobTitle,
                   style: AppTextStyles.textStyleFont15.copyWith(
                     color: AppColors.black,
                   ),
-                ),
+                ).animate().scale(),
               ],
             ),
           ),
@@ -107,7 +108,7 @@ class AboutUsWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).animate().fade();
   }
 }
 

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../Quran/presentation/widgets/search_delegate.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,6 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
+import '../../../Quran/presentation/widgets/search_delegate.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/models/models_urls.dart';
 import '../widgets/AudioHelper/get_all_surah_from_audio.dart';
@@ -142,6 +142,7 @@ class _BuildAudioPageState extends State<BuildAudioPage> {
                         SliverToBoxAdapter(
                           child: GetAllSurahWidget(
                             audioPlayer: audioPlayer,
+                            audioUrl: quranList,
                           ),
                         ),
                       ],

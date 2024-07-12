@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/utils/app_colors.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
@@ -37,48 +38,47 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                        title: Text(AppLocalizations.of(context)!.lang),
-                        leading: const Icon(Icons.language),
-                        trailing: PopupMenuButton<int>(
-                          onSelected: (int value) {
-                            switch (value) {
-                              case 0:
-                                context
-                                    .read<ChangeLanguageCubit>()
-                                    .changeLang(lang: 'ar');
-                                break;
-                              case 1:
-                                context
-                                    .read<ChangeLanguageCubit>()
-                                    .changeLang(lang: 'en');
-                                break;
-                              case 2:
-                                context
-                                    .read<ChangeLanguageCubit>()
-                                    .changeLang(lang: 'fr');
-                                break;
-                            }
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return <PopupMenuEntry<int>>[
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child:
-                                    Text(AppLocalizations.of(context)!.arabic),
-                              ),
-                              PopupMenuItem<int>(
-                                value: 1,
-                                child:
-                                    Text(AppLocalizations.of(context)!.english),
-                              ),
-                              PopupMenuItem<int>(
-                                value: 2,
-                                child:
-                                    Text(AppLocalizations.of(context)!.french),
-                              ),
-                            ];
-                          },
-                        )),
+                      title: Text(AppLocalizations.of(context)!.lang),
+                      leading: const Icon(Icons.language),
+                      trailing: PopupMenuButton<int>(
+                        onSelected: (int value) {
+                          switch (value) {
+                            case 0:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'ar');
+                              break;
+                            case 1:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'en');
+                              break;
+                            case 2:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'fr');
+                              break;
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return <PopupMenuEntry<int>>[
+                            PopupMenuItem<int>(
+                              value: 0,
+                              child: Text(AppLocalizations.of(context)!.arabic),
+                            ),
+                            PopupMenuItem<int>(
+                              value: 1,
+                              child:
+                                  Text(AppLocalizations.of(context)!.english),
+                            ),
+                            PopupMenuItem<int>(
+                              value: 2,
+                              child: Text(AppLocalizations.of(context)!.french),
+                            ),
+                          ];
+                        },
+                      ),
+                    ),
                     BlocBuilder<ThemeCubit, bool>(
                       builder: (context, state) {
                         return ListTile(
@@ -165,8 +165,9 @@ void logOut(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog.adaptive(
-        backgroundColor:
-            context.read<ThemeCubit>().state ? Colors.grey : Colors.white,
+        backgroundColor: context.read<ThemeCubit>().state
+            ? AppColors.darkBlue
+            : AppColors.white,
         content: Text(
           AppLocalizations.of(context)!.areUsure,
           style: const TextStyle(

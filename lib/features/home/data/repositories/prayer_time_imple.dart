@@ -1,7 +1,7 @@
-import '../../../../core/utils/app_strings.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../core/Network/network_info.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../domain/entities/prayer_time_entity.dart';
 import '../../domain/repositories/prayer_time_repo.dart';
 import '../datasources/prayer_local_datasource.dart';
@@ -24,7 +24,7 @@ class PrayerTimeImple implements PrayerTimeRepo {
     if (box.isEmpty) {
       final prayerTime = await remoteDataSource.getPrayerTime();
       saveBooksData(
-        prayerData: prayerTime,
+        prayerData: prayerTime!,
         boxName: AppString.keyPrayerTime,
       );
       return prayerTime;

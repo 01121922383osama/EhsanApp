@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -44,10 +45,26 @@ class HomePage extends StatelessWidget {
                 child: BlocBuilder<PrayerCubit, PrayerState>(
                   builder: (context, state) {
                     if (state is PrayerLoading) {
-                      return SliverToBoxAdapter(
-                        child: Center(
-                          child: Text(AppLocalizations.of(context)!.loading),
-                        ),
+                      return SliverList.builder(
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  color: AppColors.darkBlue.withOpacity(0.4)),
+                            ),
+                            child: const ListTile(),
+                          ).animate(
+                            onComplete: (controller) {
+                              controller.repeat();
+                            },
+                          )..shimmer(
+                              delay: const Duration(milliseconds: 800),
+                              color: AppColors.lightblue,
+                            );
+                        },
                       );
                     }
                     if (state is PrayerFailure) {

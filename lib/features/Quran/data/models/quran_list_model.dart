@@ -6,6 +6,7 @@ class QuranList {
   final String? mdnyahORmkyah;
   final String? describeSurah;
   final int? manyAyah;
+  final String? surahURL;
 
   const QuranList({
     this.index,
@@ -15,5 +16,6 @@ class QuranList {
     this.manyAyah,
     this.mdnyahORmkyah,
     this.describeSurah,
+    this.surahURL,
   });
 }

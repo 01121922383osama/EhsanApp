@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:free_lancer/core/extension/extension.dart';
-import 'package:free_lancer/core/utils/app_colors.dart';
-import 'package:free_lancer/features/Quran/presentation/widgets/build_avatar_surah.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
-import 'package:free_lancer/features/home/presentation/pages/Hadith/cubit/azkar_cubit.dart';
-import 'package:free_lancer/features/home/presentation/pages/Hadith/models/zekr_model.dart';
-import 'package:free_lancer/features/home/presentation/widgets/body_azkar_page.dart';
-import 'package:free_lancer/features/home/presentation/widgets/details_of_zek.dart';
+import '../../../../../core/extension/extension.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../Quran/presentation/widgets/build_avatar_surah.dart';
+import '../../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
+import 'cubit/azkar_cubit.dart';
+import 'models/zekr_model.dart';
+import '../../widgets/body_azkar_page.dart';
+import '../../widgets/details_of_zek.dart';
 
 import '../../../../../core/widgets/build_leading_widget.dart';
 

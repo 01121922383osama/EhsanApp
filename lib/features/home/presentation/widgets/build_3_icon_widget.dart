@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,21 +32,21 @@ class Build3IconWidget extends StatelessWidget {
               onTap: () {
                 context.pushNamed(pageRoute: RoutesName.sebhaPage);
               },
-            ),
+            ).animate().fade(),
             BuildIconWidget(
-              image: 'assets/images/hadith.png',
+              image: 'assets/images/doaa.png',
               text: AppLocalizations.of(context)!.azkar,
               onTap: () {
                 context.pushNamed(pageRoute: RoutesName.hadith);
               },
-            ),
+            ).animate().fade(),
             BuildIconWidget(
-              image: 'assets/images/doaa.png',
+              image: 'assets/images/hadith.png',
               text: AppLocalizations.of(context)!.doaa,
               onTap: () {
                 context.pushNamed(pageRoute: RoutesName.doaa);
               },
-            ),
+            ).animate().fade(),
           ],
         ),
       ),

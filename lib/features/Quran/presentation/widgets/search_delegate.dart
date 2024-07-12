@@ -194,6 +194,7 @@ List<QuranList> quranList = List.generate(
       manyAyah: quran.getVerseCount(index + 1),
       mdnyahORmkyah: quran.getPlaceOfRevelation(index + 1),
       describeSurah: quran.getSurahNameEnglish(index + 1),
+      surahURL: quran.getAudioURLBySurah(index + 1),
     );
   },
 );

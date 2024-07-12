@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -26,7 +27,7 @@ class BuildImageWidget extends StatelessWidget {
                     image: AssetImage('assets/images/person.png'),
                   ),
                 ),
-              ),
+              ).animate().shake().shimmer(),
               CustomPaint(
                 painter: DrowLineCircle(),
                 child: CircleAvatar(

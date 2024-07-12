@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/core/utils/app_strings.dart';
-import 'package:free_lancer/features/home/presentation/pages/Hadith/models/zekr_model.dart';
+import '../../../../../../core/utils/app_strings.dart';
+import '../models/zekr_model.dart';
 
 part 'azkar_state.dart';
 

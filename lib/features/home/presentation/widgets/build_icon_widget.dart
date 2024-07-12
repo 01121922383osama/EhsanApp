@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/app_styles.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class BuildIconWidget extends StatelessWidget {
   final String image;
   final String text;
   final void Function()? onTap;
-  const BuildIconWidget(
-      {super.key, required this.image, required this.text, this.onTap});
+  const BuildIconWidget({
+    super.key,
+    required this.image,
+    required this.text,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +49,13 @@ class BuildIconWidget extends StatelessWidget {
           children: [
             Image.asset(image),
             const SizedBox(height: 2),
-            Text(
-              text,
-              style: AppTextStyles.textStyleFont10,
+            FittedBox(
+              child: Text(
+                text,
+                style: AppTextStyles.textStyleFont10.copyWith(
+                  color: AppColors.black,
+                ),
+              ),
             ),
           ],
         ),
