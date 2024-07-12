@@ -1,4 +1,4 @@
-# free_lancer
+# Quran-App
 
 A new Flutter project.
 
