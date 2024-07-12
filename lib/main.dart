@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'features/home/presentation/pages/Hadith/cubit/azkar_cubit.dart';
 
 import 'config/routes/routes.dart';
 import 'config/routes/routes_name.dart';
@@ -9,6 +8,7 @@ import 'config/theme/app_theme.dart';
 import 'features/Setting/presentation/cubit/Lang/change_language_cubit.dart';
 import 'features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 import 'features/app/presentation/cubit/app_cubit.dart';
+import 'features/home/presentation/pages/Hadith/cubit/azkar_cubit.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
