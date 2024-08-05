@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:free_lancer/features/Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 import 'package:quran/quran.dart' as quran;
 
 import '../../../../core/utils/app_colors.dart';
@@ -37,9 +39,9 @@ class DetailsSurahWidget extends StatelessWidget {
               textDirection: TextDirection.rtl,
               TextSpan(
                 text: quran.getVerse(indexOfSurah! + 1, index + 1),
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: context.read<ChangeFonts>().state,
                 ),
                 children: [
                   WidgetSpan(

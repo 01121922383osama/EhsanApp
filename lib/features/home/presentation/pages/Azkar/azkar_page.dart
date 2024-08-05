@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../../core/utils/app_styles.dart';
+import 'package:free_lancer/core/utils/app_colors.dart';
 
+import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/animation_colors.dart';
 import '../../../../../core/widgets/build_leading_widget.dart';
 import '../../widgets/body_azkar_page.dart';
@@ -26,10 +27,12 @@ class AzkarPage extends StatelessWidget {
                   style: AppTextStyles.textStyleFont20,
                 ),
                 BuildIconBackWidget(
-                  icon: const Icon(Icons.search),
+                  icon: const Icon(Icons.search, color: AppColors.black),
                   onPressed: () {
                     showSearch(
-                        context: context, delegate: ZekrSearchDelegate());
+                      context: context,
+                      delegate: ZekrSearchDelegate(),
+                    );
                   },
                 ),
               ],

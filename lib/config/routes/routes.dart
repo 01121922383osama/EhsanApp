@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/home/presentation/pages/Sebha/SebehCubit/sabeh_cubit.dart';
-import '../../features/home/presentation/pages/Sebha/cubit/list_of_sabeh_cubit.dart';
 
 import '../../features/Listen/presentation/pages/build_audio_page.dart';
 import '../../features/Quran/presentation/pages/quran_page.dart';
@@ -15,6 +13,8 @@ import '../../features/auth/presentation/pages/register_screen.dart';
 import '../../features/home/presentation/pages/AsmaaAllah/asmaa_allah_page.dart';
 import '../../features/home/presentation/pages/AsmaaAllah/cubit/asmaa_hosna_cubit.dart';
 import '../../features/home/presentation/pages/Azkar/azkar_page.dart';
+import '../../features/home/presentation/pages/Sebha/SebehCubit/sabeh_cubit.dart';
+import '../../features/home/presentation/pages/Sebha/cubit/list_of_sabeh_cubit.dart';
 import '../../features/home/presentation/pages/Sebha/sebha_page.dart';
 import '../../features/home/presentation/widgets/about_us.dart';
 import '../Animations/slide_left.dart';
@@ -74,7 +74,7 @@ class AppRoute {
       builder: (context) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("404"),
+            title: const Text('404'),
             centerTitle: true,
           ),
           body: const Center(
@@ -87,7 +87,7 @@ class AppRoute {
                   color: Colors.red,
                 ),
                 Text(
-                  "Page not found",
+                  'Page not found',
                   style: TextStyle(fontSize: 20),
                 )
               ],

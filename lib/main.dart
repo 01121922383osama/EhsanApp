@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/features/Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 
 import 'config/routes/routes.dart';
 import 'config/routes/routes_name.dart';
@@ -23,33 +24,36 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AzkarCubit()..getZekrData(),
+      create: (context) => ChangeFonts(),
       child: BlocProvider(
-        create: (context) => ListOfSabehCubit(),
+        create: (context) => AzkarCubit()..getZekrData(),
         child: BlocProvider(
-          create: (context) => ChangeLanguageCubit(),
+          create: (context) => ListOfSabehCubit(),
           child: BlocProvider(
-            create: (context) => ThemeCubit(),
-            child: BlocBuilder<ThemeCubit, bool>(
-              builder: (context, state) {
-                return BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
-                  builder: (context, lang) {
-                    return MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      darkTheme: ThemeData.dark(useMaterial3: true),
-                      themeMode: state ? ThemeMode.dark : ThemeMode.light,
-                      theme: AppTheme.themeData,
-                      locale: Locale(lang.lang),
-                      localizationsDelegates:
-                          AppLocalizations.localizationsDelegates,
-                      supportedLocales: AppLocalizations.supportedLocales,
-                      initialRoute: RoutesName.oboardingscreen,
-                      onGenerateRoute: AppRoute.onGenerateRoute,
-                      onUnknownRoute: AppRoute.onUnknownRoute,
-                    );
-                  },
-                );
-              },
+            create: (context) => ChangeLanguageCubit(),
+            child: BlocProvider(
+              create: (context) => ThemeCubit(),
+              child: BlocBuilder<ThemeCubit, bool>(
+                builder: (context, state) {
+                  return BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
+                    builder: (context, lang) {
+                      return MaterialApp(
+                        debugShowCheckedModeBanner: false,
+                        darkTheme: ThemeData.dark(useMaterial3: true),
+                        themeMode: state ? ThemeMode.dark : ThemeMode.light,
+                        theme: AppTheme.themeData,
+                        locale: Locale(lang.lang),
+                        localizationsDelegates:
+                            AppLocalizations.localizationsDelegates,
+                        supportedLocales: AppLocalizations.supportedLocales,
+                        initialRoute: RoutesName.oboardingscreen,
+                        onGenerateRoute: AppRoute.onGenerateRoute,
+                        onUnknownRoute: AppRoute.onUnknownRoute,
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ),

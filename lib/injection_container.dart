@@ -30,6 +30,7 @@ Future<void> init() async {
   await Hive.openBox<PrayerTimeEntity>(AppString.keyPrayerTime);
   await Hive.openBox(AppString.themeMode);
   await Hive.openBox(AppString.changeLang);
+  await Hive.openBox(AppString.changeFonts);
   // cubit
 
   sl.registerFactory(() => PrayerCubit(prayerTimeUseCases: sl.call()));

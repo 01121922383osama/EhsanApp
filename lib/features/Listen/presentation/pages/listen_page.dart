@@ -24,7 +24,7 @@ class ListenPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: CustomScrollView(
             primary: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             slivers: [
               const BuildFirstWidget(),
               SliverToBoxAdapter(

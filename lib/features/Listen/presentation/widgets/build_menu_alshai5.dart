@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,50 +15,44 @@ class BuildMenuShai5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
-      child: Scrollbar(
-        child: ListView.builder(
-          padding: EdgeInsets.only(bottom: context.width * 0.25),
-          primary: true,
-          itemCount: _list.length,
-          itemBuilder: (context, index) {
-            return Card(
-              color: AppColors.transparent,
+    return SliverList.builder(
+      itemCount: _list.length,
+      itemBuilder: (context, index) {
+        return Scrollbar(
+          child: Card(
+            color: AppColors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-              ),
-              child: ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: BorderSide(
-                    color: context.read<ThemeCubit>().state
-                        ? AppColors.white.withOpacity(0.5)
-                        : AppColors.white,
-                  ),
-                ),
-                onTap: () {
-                  context.push(
-                    widget: BuildAudioPage(
-                      audioUrl: _list[index],
-                    ),
-                  );
-                },
-                leading: LeadingWidget(index: index),
-                title: Text(
-                  _list[index][index].title1,
-                  style: TextStyle(
-                    color: context.read<ThemeCubit>().state
-                        ? AppColors.white
-                        : AppColors.white,
-                  ),
+                side: BorderSide(
+                  color: context.read<ThemeCubit>().state
+                      ? AppColors.white.withOpacity(0.5)
+                      : AppColors.white,
                 ),
               ),
-            )
-                .animate()
-                .scale(begin: const Offset(0.8, 1), end: const Offset(1, 1));
-          },
-        ),
-      ),
+              onTap: () {
+                context.push(
+                  widget: BuildAudioPage(
+                    audioUrl: _list[index],
+                  ),
+                );
+              },
+              leading: LeadingWidget(index: index),
+              title: Text(
+                _list[index][index].title1,
+                style: TextStyle(
+                  color: context.read<ThemeCubit>().state
+                      ? AppColors.white
+                      : AppColors.white,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
