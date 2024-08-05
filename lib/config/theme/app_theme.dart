@@ -7,7 +7,6 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.darkBlue,
     ),
-    scaffoldBackgroundColor: AppColors.white,
     useMaterial3: true,
   );
 }

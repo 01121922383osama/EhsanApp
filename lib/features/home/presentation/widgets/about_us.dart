@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/widgets/animation_colors.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -125,11 +126,23 @@ class AboutUsPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: const BuildIconBackWidget(),
-          title: Text(AppLocalizations.of(context)!.about),
+          automaticallyImplyLeading: false,
+          flexibleSpace: AnimationColorsContainer(
+            child: SafeArea(
+              child: Row(
+                children: [
+                  const BuildIconBackWidget(),
+                  Text(
+                    AppLocalizations.of(context)!.about,
+                    style: AppTextStyles.textStyleFont20,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
+        body: AnimationColorsContainer(
+          child: ListView(
             children: [
               AboutUsWidget(
                 name: AppLocalizations.of(context)!.nameOsama,

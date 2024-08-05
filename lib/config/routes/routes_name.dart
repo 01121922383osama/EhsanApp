@@ -11,6 +11,7 @@ class RoutesName {
   static const String quranPage = '/quran_page';
   static const String surahPage = '/surah_page';
   static const String sebhaPage = '/sebha_page';
+  static const String addTasbeh = '/add_tasbeh';
   static const String listenPage = '/listen_page';
   static const String audioPage = '/audio_page';
   static const String aboutUs = '/about_us_page';

@@ -24,7 +24,7 @@ class BuildListTileWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: context.read<ThemeCubit>().state
               ? AppColors.white.withOpacity(0.7)
-              : AppColors.lightgray,
+              : AppColors.white,
           borderRadius: BorderRadius.circular(8),
         ),
         alignment: Alignment.center,

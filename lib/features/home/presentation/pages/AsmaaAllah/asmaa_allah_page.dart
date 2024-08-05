@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/extension/blurry_widget.dart';
+import '../../../../../core/widgets/build_leading_widget.dart';
+
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
+import '../../../../../core/widgets/animation_colors.dart';
 import 'cubit/asmaa_hosna_cubit.dart';
-
-import '../../../../../core/widgets/build_leading_widget.dart';
 
 class AsmaaAllahPage extends StatelessWidget {
   const AsmaaAllahPage({super.key});
@@ -12,40 +14,59 @@ class AsmaaAllahPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BuildIconBackWidget(),
-      ),
-      body: BlocBuilder<AsmaaHosnaCubit, AsmaaHosnaState>(
-        builder: (context, state) {
-          if (state is AsmaaHosnaLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          }
-          if (state is AsmaaHosnaSuccess) {
-            return Scrollbar(
-              child: ListView.builder(
-                itemCount: state.asmaaModel.length,
-                itemBuilder: (context, index) {
-                  final asmaAllah = state.asmaaModel[index];
-                  return DetailsAmaaHosna(
-                    index: index,
-                    name: asmaAllah.name,
-                    text: asmaAllah.text,
+      body: AnimationColorsContainer(
+        child: SafeArea(
+          top: false,
+          child: Stack(
+            children: [
+              BlocBuilder<AsmaaHosnaCubit, AsmaaHosnaState>(
+                builder: (context, state) {
+                  if (state is AsmaaHosnaLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }
+                  if (state is AsmaaHosnaSuccess) {
+                    return SafeArea(
+                      child: Scrollbar(
+                        child: NotificationListener<
+                            OverscrollIndicatorNotification>(
+                          onNotification: (notification) {
+                            notification.disallowIndicator();
+                            return true;
+                          },
+                          child: ListView.builder(
+                            itemCount: state.asmaaModel.length,
+                            itemBuilder: (context, index) {
+                              final asmaAllah = state.asmaaModel[index];
+                              return DetailsAmaaHosna(
+                                index: index,
+                                name: asmaAllah.name,
+                                text: asmaAllah.text,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  if (state is AsmaaHosnaFialure) {
+                    return Center(
+                      child: Text(state.error),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
                   );
                 },
               ),
-            );
-          }
-          if (state is AsmaaHosnaFialure) {
-            return Center(
-              child: Text(state.error),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        },
+              const Padding(
+                padding: EdgeInsetsDirectional.only(top: 20),
+                child: BuildIconBackWidget(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -77,7 +98,9 @@ class DetailsAmaaHosna extends StatelessWidget {
           Chip(
             label: Text(
               name,
-              style: AppTextStyles.textStyleFont20,
+              style: AppTextStyles.textStyleFont20.copyWith(
+                color: AppColors.white,
+              ),
             ),
             color: WidgetStatePropertyAll(AppColors.red.withOpacity(0.5)),
           ),
@@ -92,12 +115,14 @@ class DetailsAmaaHosna extends StatelessWidget {
               child: Text(
                 text,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.textStyleFont15WoColor,
+                style: AppTextStyles.textStyleFont15WoColor.copyWith(
+                  color: AppColors.white,
+                ),
               ),
             ),
           ),
         ],
-      ),
+      ).blurry(blur: 15),
     );
   }
 }

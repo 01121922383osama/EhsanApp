@@ -16,8 +16,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return BlocProvider(
+      create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overScroll) {
@@ -40,61 +41,58 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              BlocProvider(
-                create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
-                child: BlocBuilder<PrayerCubit, PrayerState>(
-                  builder: (context, state) {
-                    if (state is PrayerLoading) {
-                      return SliverList.builder(
-                        itemCount: 6,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                  color: AppColors.darkBlue.withOpacity(0.4)),
-                            ),
-                            child: const ListTile(),
-                          ).animate(
-                            onComplete: (controller) {
-                              controller.repeat();
-                            },
-                          )..shimmer(
-                              delay: const Duration(milliseconds: 800),
-                              color: AppColors.lightblue,
-                            );
-                        },
-                      );
-                    }
-                    if (state is PrayerFailure) {
-                      return SliverToBoxAdapter(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 60 * 1.5),
-                              Text(
-                                AppLocalizations.of(context)!.checkInternet,
-                                style: const TextStyle(
-                                  color: AppColors.red,
-                                ),
-                              ),
-                              const SizedBox(height: 25),
-                              TextButton(
-                                onPressed: () {
-                                  context.read<PrayerCubit>().getPrayerTime();
-                                },
-                                child: Text(
-                                    AppLocalizations.of(context)!.tryAgain),
-                              ),
-                            ],
+              BlocBuilder<PrayerCubit, PrayerState>(
+                builder: (context, state) {
+                  if (state is PrayerLoading) {
+                    return SliverList.builder(
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                                color: AppColors.darkBlue.withOpacity(0.4)),
                           ),
+                          child: const ListTile(),
+                        ).animate(
+                          onComplete: (controller) {
+                            controller.repeat();
+                          },
+                        )..shimmer(
+                            delay: const Duration(milliseconds: 800),
+                            color: AppColors.lightblue,
+                          );
+                      },
+                    );
+                  }
+                  if (state is PrayerFailure) {
+                    return SliverToBoxAdapter(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 60 * 1.5),
+                            Text(
+                              AppLocalizations.of(context)!.checkInternet,
+                              style: const TextStyle(
+                                color: AppColors.red,
+                              ),
+                            ),
+                            const SizedBox(height: 25),
+                            TextButton(
+                              onPressed: () {
+                                context.read<PrayerCubit>().getPrayerTime();
+                              },
+                              child:
+                                  Text(AppLocalizations.of(context)!.tryAgain),
+                            ),
+                          ],
                         ),
-                      );
-                    }
-                    return const PrayerTime();
-                  },
-                ),
+                      ),
+                    );
+                  }
+                  return const PrayerTime();
+                },
               ),
               const SpaceWidget(height: 100),
             ],

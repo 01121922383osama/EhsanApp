@@ -17,26 +17,23 @@ class BuildIconBackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: CircleAvatar(
-          backgroundColor: context.read<ThemeCubit>().state
-              ? AppColors.white.withOpacity(0.5)
-              : AppColors.lightblue,
-          radius: 25,
-          child: IconButton(
-            onPressed: onPressed ??
-                () {
-                  context.pop();
-                },
-            icon: icon ??
-                const Icon(
-                  CupertinoIcons.back,
-                  color: AppColors.black,
-                ),
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: CircleAvatar(
+        backgroundColor: context.read<ThemeCubit>().state
+            ? AppColors.white.withOpacity(0.5)
+            : AppColors.lightblue,
+        radius: 25,
+        child: IconButton(
+          onPressed: onPressed ??
+              () {
+                context.pop();
+              },
+          icon: icon ??
+              const Icon(
+                CupertinoIcons.back,
+                color: AppColors.black,
+              ),
         ),
       ),
     );

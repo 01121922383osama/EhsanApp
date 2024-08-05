@@ -190,6 +190,7 @@ List<QuranList> quranList = List.generate(
       index: index + 1,
       surahArabic: quran.getSurahNameArabic(index + 1),
       surahEnglish: quran.getSurahName(index + 1),
+      surahFr: quran.getSurahNameFrench(index + 1),
       ayat: quran.getSurahName(index + 1),
       manyAyah: quran.getVerseCount(index + 1),
       mdnyahORmkyah: quran.getPlaceOfRevelation(index + 1),

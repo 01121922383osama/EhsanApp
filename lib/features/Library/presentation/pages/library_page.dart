@@ -10,29 +10,23 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overScroll) {
-            overScroll.disallowIndicator();
-            return false;
-          },
-          child: CustomScrollView(
-            primary: true,
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              const SpaceWidget(height: 15),
-              const BuildListBooks(),
-              const SpaceWidget(height: 20),
-              const BuildOtherBooks(),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: context.width / 4,
-                ),
-              ),
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overScroll) {
+          overScroll.disallowIndicator();
+          return false;
+        },
+        child: CustomScrollView(
+          primary: true,
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            const SpaceWidget(height: 15),
+            const BuildListBooks(),
+            const SpaceWidget(height: 20),
+            const BuildOtherBooks(),
+            SpaceWidget(height: context.width / 4),
+          ],
         ),
       ),
     );

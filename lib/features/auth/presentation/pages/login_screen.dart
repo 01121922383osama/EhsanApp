@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/extension/blurry_widget.dart';
+import '../../../../core/widgets/animation_colors.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_icon_widget.dart';
-import '../../../app/presentation/pages/app_page.dart';
 import '../widgets/build_other_auth_widget.dart';
 import '../widgets/build_remember_widget.dart';
 import '../widgets/build_text_widget.dart';
@@ -17,21 +17,20 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundScaffold,
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overScroll) {
           overScroll.disallowIndicator();
           return false;
         },
-        child: SingleChildScrollView(
+        child: AnimationColorsContainer(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: Column(
+            child: ListView(
               children: [
                 BuildTextWidget(
                   text1: AppLocalizations.of(context)!.welcomeBack,
                   text2: AppLocalizations.of(context)!.contentLoginPage,
-                ),
+                ).blurry(),
                 BuildTextFieldWidget(
                     hintText: AppLocalizations.of(context)!.emailHint),
                 const SizedBox(height: 20),
@@ -43,7 +42,7 @@ class LoginPage extends StatelessWidget {
                 CustomIconButton(
                   textButton: AppLocalizations.of(context)!.signIn,
                   onPressed: () {
-                    context.pushAndRemoveUntil(widget: AppPage());
+                    context.pushReplacementNamed(pageRoute: RoutesName.app);
                   },
                 ),
                 const SizedBox(height: 35),

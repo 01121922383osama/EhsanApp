@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/extension/blurry_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
@@ -17,7 +18,7 @@ class BuildFirstWidget extends StatelessWidget {
         margin: const EdgeInsets.all(5),
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: AppColors.lightgray.withOpacity(0.5),
+          color: AppColors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -74,7 +75,7 @@ class BuildFirstWidget extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ).blurry(),
       ).animate().flip(),
     );
   }

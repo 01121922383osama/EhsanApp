@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import 'build_icon_widget.dart';
 
 class Build3IconWidget extends StatelessWidget {
@@ -18,10 +18,12 @@ class Build3IconWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
-          color: context.read<ThemeCubit>().state
-              ? AppColors.white.withOpacity(0.2)
-              : AppColors.lightgray,
           borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: context.read<ThemeCubit>().state
+                ? AppColors.white.withOpacity(0.2)
+                : AppColors.white.withOpacity(0.8),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

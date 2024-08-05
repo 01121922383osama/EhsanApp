@@ -47,7 +47,7 @@ dependencies:
   animated_custom_dropdown: ^3.0.0
   quran: ^1.2.5
   just_audio: ^0.9.37
-  rxdart: ^0.27.7
+  rxdart: ^0.28.0
   just_audio_background: ^0.0.1-beta.11
   audio_session: ^0.1.19
   hive: ^2.2.3

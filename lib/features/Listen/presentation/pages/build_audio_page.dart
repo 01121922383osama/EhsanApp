@@ -8,7 +8,6 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../Quran/presentation/widgets/search_delegate.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
@@ -56,14 +55,16 @@ class _BuildAudioPageState extends State<BuildAudioPage> {
     } catch (e) {
       if (context.mounted) {
         // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Failed to load audio source: $e',
-              textAlign: TextAlign.center,
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(
+                'Failed to load audio source: $e',
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        );
+          );
       }
     }
   }
@@ -129,8 +130,6 @@ class _BuildAudioPageState extends State<BuildAudioPage> {
                       physics: const BouncingScrollPhysics(),
                       slivers: [
                         SliverAppBar(
-                          backgroundColor:
-                              state ? AppColors.black : AppColors.white,
                           automaticallyImplyLeading: false,
                           floating: true,
                           centerTitle: true,

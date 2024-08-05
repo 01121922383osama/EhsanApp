@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../../core/utils/app_styles.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
 
 class BuildTextWidget extends StatelessWidget {
   final String text1;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/extension/blurry_widget.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -12,52 +13,55 @@ class BuildImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              Container(
-                width: context.width * 0.30,
-                height: context.width * 0.30,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/person.png'),
+    return Card(
+      color: AppColors.transparent,
+      child: Align(
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                Container(
+                  width: context.width * 0.30,
+                  height: context.width * 0.30,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/person.png'),
+                    ),
+                  ),
+                ).animate().shake().shimmer(),
+                CustomPaint(
+                  painter: DrowLineCircle(),
+                  child: CircleAvatar(
+                    backgroundColor: context.read<ThemeCubit>().state
+                        ? AppColors.grey
+                        : AppColors.lightblue,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.edit),
+                    ),
                   ),
                 ),
-              ).animate().shake().shimmer(),
-              CustomPaint(
-                painter: DrowLineCircle(),
-                child: CircleAvatar(
-                  backgroundColor: context.read<ThemeCubit>().state
-                      ? AppColors.grey
-                      : AppColors.lightblue,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                  ),
-                ),
+              ],
+            ),
+            Text(
+              AppLocalizations.of(context)!.titleApp,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
-            ],
-          ),
-          Text(
-            AppLocalizations.of(context)!.titleApp,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
             ),
-          ),
-          const Text(
-            'EhsanApp@gmail.com',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+            const Text(
+              'EhsanApp@gmail.com',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ).blurry(blur: 50),
     );
   }
 }

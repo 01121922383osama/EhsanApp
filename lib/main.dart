@@ -7,8 +7,8 @@ import 'config/routes/routes_name.dart';
 import 'config/theme/app_theme.dart';
 import 'features/Setting/presentation/cubit/Lang/change_language_cubit.dart';
 import 'features/Setting/presentation/cubit/Theme/theme_cubit.dart';
-import 'features/app/presentation/cubit/app_cubit.dart';
-import 'features/home/presentation/pages/Hadith/cubit/azkar_cubit.dart';
+import 'features/home/presentation/pages/Azkar/cubit/azkar_cubit.dart';
+import 'features/home/presentation/pages/Sebha/cubit/list_of_sabeh_cubit.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AzkarCubit()..getZekrData(),
       child: BlocProvider(
-        create: (context) => AppCubit(),
+        create: (context) => ListOfSabehCubit(),
         child: BlocProvider(
           create: (context) => ChangeLanguageCubit(),
           child: BlocProvider(

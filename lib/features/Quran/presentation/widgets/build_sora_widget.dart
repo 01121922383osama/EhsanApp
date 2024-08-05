@@ -20,6 +20,7 @@ class BuildSoraNamesWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final quran = quranList[index];
         return Card(
+          color: AppColors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -42,7 +43,7 @@ class BuildSoraNamesWidget extends StatelessWidget {
                     style: TextStyle(
                       color: context.read<ThemeCubit>().state
                           ? AppColors.white
-                          : AppColors.black,
+                          : AppColors.white,
                       fontSize: 14,
                     ),
                   ),

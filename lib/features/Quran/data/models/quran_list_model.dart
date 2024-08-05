@@ -2,6 +2,7 @@ class QuranList {
   final int? index;
   final String? surahArabic;
   final String? surahEnglish;
+  final String? surahFr;
   final String? ayat;
   final String? mdnyahORmkyah;
   final String? describeSurah;
@@ -12,6 +13,7 @@ class QuranList {
     this.index,
     this.surahArabic,
     this.surahEnglish,
+    this.surahFr,
     this.ayat,
     this.manyAyah,
     this.mdnyahORmkyah,

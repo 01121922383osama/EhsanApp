@@ -31,7 +31,7 @@ class SubTitelWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: AppColors.black.withOpacity(0.5),
+                color: AppColors.white.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8),
               ),
             ),

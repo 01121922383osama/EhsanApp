@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/home/presentation/pages/AsmaaAllah/cubit/asmaa_hosna_cubit.dart';
+import '../../features/home/presentation/pages/Sebha/SebehCubit/sabeh_cubit.dart';
+import '../../features/home/presentation/pages/Sebha/cubit/list_of_sabeh_cubit.dart';
 
 import '../../features/Listen/presentation/pages/build_audio_page.dart';
 import '../../features/Quran/presentation/pages/quran_page.dart';
 import '../../features/Quran/presentation/pages/surah_page.dart';
 import '../../features/SplashPage/splash_page.dart';
+import '../../features/app/presentation/cubit/app_cubit.dart';
+import '../../features/app/presentation/pages/app_page.dart';
 import '../../features/auth/presentation/pages/forget_password_page.dart';
 import '../../features/auth/presentation/pages/login_screen.dart';
 import '../../features/auth/presentation/pages/register_screen.dart';
 import '../../features/home/presentation/pages/AsmaaAllah/asmaa_allah_page.dart';
-import '../../features/home/presentation/pages/Hadith/hadith_page.dart';
+import '../../features/home/presentation/pages/AsmaaAllah/cubit/asmaa_hosna_cubit.dart';
+import '../../features/home/presentation/pages/Azkar/azkar_page.dart';
 import '../../features/home/presentation/pages/Sebha/sebha_page.dart';
 import '../../features/home/presentation/widgets/about_us.dart';
 import '../Animations/slide_left.dart';
@@ -21,6 +25,12 @@ class AppRoute {
     switch (settings.name) {
       case RoutesName.oboardingscreen:
         return MaterialPageRoute(builder: (context) => const SplashPage());
+      case RoutesName.app:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => AppCubit(),
+                  child: const AppPage(),
+                ));
       case RoutesName.loginscreen:
         return MaterialPageRoute(builder: (context) => const LoginPage());
       case RoutesName.registerscreen:
@@ -32,13 +42,21 @@ class AppRoute {
       case RoutesName.surahPage:
         return SlideToLeft(page: const SurahPage());
       case RoutesName.sebhaPage:
-        return SlideToLeft(page: const SebhaPage());
+        return SlideToLeft(
+            page: BlocProvider(
+          create: (context) => SabehCubit(),
+          child: BlocProvider(
+            create: (context) => ListOfSabehCubit(),
+            child: const SebhaPage(),
+          ),
+        ));
+
       case RoutesName.audioPage:
         return SlideToLeft(page: const BuildAudioPage());
       case RoutesName.aboutUs:
         return SlideToLeft(page: const AboutUsPage());
       case RoutesName.hadith:
-        return SlideToLeft(page: const HadithPage());
+        return SlideToLeft(page: const AzkarPage());
       case RoutesName.doaa:
         return SlideToLeft(
             page: BlocProvider(

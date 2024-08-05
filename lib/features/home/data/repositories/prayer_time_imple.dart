@@ -20,8 +20,7 @@ class PrayerTimeImple implements PrayerTimeRepo {
 
   @override
   Future<PrayerTimeEntity> getPrayerTime() async {
-    var box = Hive.box<PrayerTimeEntity>(AppString.keyPrayerTime);
-    if (box.isEmpty) {
+    if (await networkInfo.isConnected) {
       final prayerTime = await remoteDataSource.getPrayerTime();
       saveBooksData(
         prayerData: prayerTime!,

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../core/extension/blurry_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
@@ -35,7 +36,7 @@ class BuildOtherSignInWithWidget extends StatelessWidget {
               child: Divider(),
             ),
           ],
-        ),
+        ).blurry(blur: 25),
         const SizedBox(height: 15),
         const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

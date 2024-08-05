@@ -15,7 +15,7 @@ class TrailingWidget extends StatelessWidget {
       style: TextStyle(
         color: context.read<ThemeCubit>().state
             ? AppColors.white
-            : AppColors.black,
+            : AppColors.white,
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
