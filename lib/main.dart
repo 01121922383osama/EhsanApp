@@ -10,7 +10,7 @@ import 'features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 import 'features/home/presentation/pages/Azkar/cubit/azkar_cubit.dart';
 import 'features/home/presentation/pages/Sebha/cubit/list_of_sabeh_cubit.dart';
 import 'injection_container.dart' as di;
-
+// 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
