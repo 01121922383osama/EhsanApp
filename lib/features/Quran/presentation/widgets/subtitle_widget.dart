@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_svg.dart';
 import 'circle_widget.dart';
 import 'trailing_widget.dart';
@@ -31,8 +30,8 @@ class SubTitelWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: AppColors.white.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8),
+                border: Border.all(),
               ),
             ),
             CircleWidget(

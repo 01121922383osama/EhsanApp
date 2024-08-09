@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/assets_svg.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class LeadingWidget extends StatelessWidget {
   final int index;
@@ -20,10 +17,7 @@ class LeadingWidget extends StatelessWidget {
         ),
         Text(
           '${index + 1}',
-          style: TextStyle(
-            color: context.read<ThemeCubit>().state
-                ? AppColors.white
-                : AppColors.primary,
+          style: const TextStyle(
             fontSize: 15,
           ),
         ),

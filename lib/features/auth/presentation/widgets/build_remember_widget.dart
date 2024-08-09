@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class BuildRememerWidget extends StatefulWidget {
@@ -28,8 +27,7 @@ class _BuildRememerWidgetState extends State<BuildRememerWidget> {
             },
             child: Text(
               AppLocalizations.of(context)!.forgotPassword,
-              style:
-                  AppTextStyles.textStyleFont15.copyWith(color: AppColors.red),
+              style: AppTextStyles.textStyleFont15,
             ),
           ),
           const Spacer(),
@@ -38,7 +36,6 @@ class _BuildRememerWidgetState extends State<BuildRememerWidget> {
             style: AppTextStyles.textStyleFont15,
           ),
           Checkbox(
-            activeColor: AppColors.red,
             value: isClick,
             onChanged: (value) {
               setState(() {

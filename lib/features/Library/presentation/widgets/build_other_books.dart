@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../core/extension/screen_utils.dart';
-import '../../../../core/utils/app_colors.dart';
 
 class BuildOtherBooks extends StatelessWidget {
   const BuildOtherBooks({super.key});
@@ -21,13 +18,8 @@ class BuildOtherBooks extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.lightgray.withOpacity(0.2),
-            border: Border.all(
-              color: context.read<ThemeCubit>().state
-                  ? AppColors.white.withOpacity(0.3)
-                  : AppColors.lightblue,
-            ),
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(),
           ),
           alignment: AlignmentDirectional.center,
           child: Text(

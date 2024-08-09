@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 import 'build_list_widgtet.dart';
 
 class BuildListBooks extends StatelessWidget {
@@ -21,7 +20,6 @@ class BuildListBooks extends StatelessWidget {
             titlel: AppLocalizations.of(context)!.holyQuran,
             trailing: const Icon(
               CupertinoIcons.book,
-              color: AppColors.redDart,
             ),
             onTap: () {
               context.pushNamed(pageRoute: RoutesName.quranPage);
@@ -31,7 +29,6 @@ class BuildListBooks extends StatelessWidget {
             titlel: AppLocalizations.of(context)!.tfsir,
             trailing: const Icon(
               Icons.menu_book,
-              color: AppColors.redDart,
             ),
           ),
         ],

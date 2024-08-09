@@ -58,11 +58,11 @@ class ZekrSearchDelegate extends SearchDelegate {
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white.withOpacity(0.5)
-                          : AppColors.black,
-                    ),
+                    // side: BorderSide(
+                    //   color: context.read<ThemeCubit>().state
+                    //       ?
+                    //       :
+                    // ),
                   ),
                   leading: BuildAvatarNumber(index: index),
                   title: Text(zekr.category),
@@ -110,11 +110,11 @@ class ZekrSearchDelegate extends SearchDelegate {
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white.withOpacity(0.5)
-                          : AppColors.black,
-                    ),
+                    // side: BorderSide(
+                    //   color: context.read<ThemeCubit>().state
+                    //       ?
+                    //       :
+                    // ),
                   ),
                   leading: BuildAvatarNumber(
                     index: index,

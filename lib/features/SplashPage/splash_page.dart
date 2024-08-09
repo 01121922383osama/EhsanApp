@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../config/routes/routes_name.dart';
 import '../../core/extension/extension.dart';
-import '../../core/utils/app_colors.dart';
 import '../../core/utils/assets_svg.dart';
 
 class SplashPage extends StatefulWidget {
@@ -25,7 +24,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkBlue,
       body: SafeArea(
         child: Stack(
           children: [

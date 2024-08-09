@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/models/quran_list_model.dart';
 import '../pages/surah_page.dart';
 import 'leading_widget.dart';
@@ -20,39 +19,31 @@ class BuildSoraNamesWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final quran = quranList[index];
         return Card(
-          color: AppColors.transparent,
+          color: context.read<ThemeCubit>().state
+              ? Colors.transparent
+              : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
+            side: const BorderSide(),
           ),
           margin: const EdgeInsets.symmetric(vertical: 5),
           child: ListTile(
             leading: LeadingWidget(index: index),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
-              side: BorderSide(
-                color: context.read<ThemeCubit>().state
-                    ? AppColors.white.withOpacity(0.5)
-                    : AppColors.white,
-              ),
             ),
             title: Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: quran.surahEnglish,
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.white,
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                   TextSpan(
                     text: ' (${quran.describeSurah})',
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.redDart,
+                    style: const TextStyle(
                       fontSize: 10,
                     ),
                   ),

@@ -76,5 +76,6 @@
     "profile": "Profil",
     "checkInternet": "Verfiez votre connection internet!",
     "loading": "Chargement...",
-    "tryAgain": "Essayer a nouveau"
+    "tryAgain": "Essayer a nouveau",
+    "fontsize": "Taile de police"
 }

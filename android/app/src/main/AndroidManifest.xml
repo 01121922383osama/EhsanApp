@@ -10,6 +10,7 @@
     <application
         android:label="إحـسـان"
         android:name="${applicationName}"
+        android:extractNativeLibs="true"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
         android:networkSecurityConfig="@xml/network_security_config"

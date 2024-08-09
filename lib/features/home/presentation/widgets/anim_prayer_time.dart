@@ -61,7 +61,6 @@ class _AnimPrayerTimeState extends State<AnimPrayerTime>
       decoration: BoxDecoration(
         color: AppColors.paryersTime[widget.index].withOpacity(0.3),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.white, width: 0.5),
       ),
       child: Stack(
         alignment: Alignment.center,

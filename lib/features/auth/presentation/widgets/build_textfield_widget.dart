@@ -15,7 +15,7 @@ class BuildTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: AppColors.black.withOpacity(0.5)),
+      // style: TextStyle(color:
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus!.unfocus();
       },
@@ -27,8 +27,8 @@ class BuildTextFieldWidget extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: AppColors.black.withOpacity(0.3)),
-        fillColor: AppColors.white,
+        // hintStyle: TextStyle(color:
+        // fillColor:
         filled: true,
       ),
       textInputAction:

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
@@ -18,12 +16,8 @@ class Build3IconWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: context.read<ThemeCubit>().state
-                ? AppColors.white.withOpacity(0.2)
-                : AppColors.white.withOpacity(0.8),
-          ),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -32,6 +26,9 @@ class Build3IconWidget extends StatelessWidget {
               image: 'assets/images/sebha.png',
               text: AppLocalizations.of(context)!.sebha,
               onTap: () {
+                SystemChrome.setPreferredOrientations(
+                  [DeviceOrientation.portraitUp],
+                );
                 context.pushNamed(pageRoute: RoutesName.sebhaPage);
               },
             ).animate().fade(),

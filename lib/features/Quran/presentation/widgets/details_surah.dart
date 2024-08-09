@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 import 'package:quran/quran.dart' as quran;
 
-import '../../../../core/utils/app_colors.dart';
+import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 import 'build_avatar_surah.dart';
 
 class DetailsSurahWidget extends StatelessWidget {
@@ -18,7 +17,6 @@ class DetailsSurahWidget extends StatelessWidget {
     return SliverList.separated(
       separatorBuilder: (context, index) {
         return const Divider(
-          color: AppColors.primary,
           thickness: 0.2,
         );
       },

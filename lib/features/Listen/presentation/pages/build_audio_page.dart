@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
@@ -112,42 +113,34 @@ class _BuildAudioPageState extends State<BuildAudioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppbar(
+        leading: const BuildIconBackWidget(),
+        title: GetNameOfAudio(
+          audioPlayer: audioPlayer,
+        ),
+        centerTitle: true,
+      ),
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: Column(
           children: [
             Expanded(
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (overscroll) {
-                  overscroll.disallowIndicator();
-                  return true;
+              child: BlocBuilder<ThemeCubit, bool>(
+                builder: (context, state) {
+                  return CustomScrollView(
+                    primary: true,
+                    cacheExtent: 10000,
+                    physics: const BouncingScrollPhysics(),
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: GetAllSurahWidget(
+                          audioPlayer: audioPlayer,
+                          audioUrl: quranList,
+                        ),
+                      ),
+                    ],
+                  );
                 },
-                child: BlocBuilder<ThemeCubit, bool>(
-                  builder: (context, state) {
-                    return CustomScrollView(
-                      primary: true,
-                      cacheExtent: 10000,
-                      physics: const BouncingScrollPhysics(),
-                      slivers: [
-                        SliverAppBar(
-                          automaticallyImplyLeading: false,
-                          floating: true,
-                          centerTitle: true,
-                          leading: const BuildIconBackWidget(),
-                          title: GetNameOfAudio(
-                            audioPlayer: audioPlayer,
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: GetAllSurahWidget(
-                            audioPlayer: audioPlayer,
-                            audioUrl: quranList,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
               ),
             ),
             Directionality(

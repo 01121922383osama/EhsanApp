@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 
-import '../../../../core/extension/blurry_widget.dart';
-import '../../../../core/widgets/animation_colors.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../widgets/build_sora_widget.dart';
 import '../widgets/search_delegate.dart';
@@ -12,46 +11,28 @@ class QuranPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimationColorsContainer(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const BuildIconBackWidget().blurry(),
-                    BuildIconBackWidget(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {
-                        showSearch(context: context, delegate: SearchQuran());
-                      },
-                    ).blurry(),
-                  ],
-                ),
-                Expanded(
-                  child: Scrollbar(
-                    child:
-                        NotificationListener<OverscrollIndicatorNotification>(
-                      onNotification: (overScroll) {
-                        overScroll.disallowIndicator();
-                        return false;
-                      },
-                      child: CustomScrollView(
-                        primary: true,
-                        physics: const BouncingScrollPhysics(),
-                        slivers: [
-                          BuildSoraNamesWidget(
-                            quranList: quranList,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      appBar: CustomAppbar(
+        leading: const BuildIconBackWidget(),
+        actions: [
+          BuildIconBackWidget(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: SearchQuran());
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Scrollbar(
+          child: CustomScrollView(
+            primary: true,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              BuildSoraNamesWidget(
+                quranList: quranList,
+              ),
+            ],
           ),
         ),
       ),

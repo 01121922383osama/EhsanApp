@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/core/utils/app_strings.dart';
+import '../../../../../core/utils/app_strings.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class ChangeFonts extends Cubit<double> {

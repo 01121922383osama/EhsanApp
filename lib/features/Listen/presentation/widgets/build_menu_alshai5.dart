@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../Quran/presentation/widgets/leading_widget.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/datasources/LocalDataSourceShaikh/export.dart';
 import '../../data/models/models_urls.dart';
 import '../pages/build_audio_page.dart';
@@ -20,18 +19,15 @@ class BuildMenuShai5 extends StatelessWidget {
       itemBuilder: (context, index) {
         return Scrollbar(
           child: Card(
-            color: AppColors.transparent,
+            color: context.read<ThemeCubit>().state
+                ? Colors.transparent
+                : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
             child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: BorderSide(
-                  color: context.read<ThemeCubit>().state
-                      ? AppColors.white.withOpacity(0.5)
-                      : AppColors.white,
-                ),
               ),
               onTap: () {
                 context.push(
@@ -43,11 +39,6 @@ class BuildMenuShai5 extends StatelessWidget {
               leading: LeadingWidget(index: index),
               title: Text(
                 _list[index][index].title1,
-                style: TextStyle(
-                  color: context.read<ThemeCubit>().state
-                      ? AppColors.white
-                      : AppColors.white,
-                ),
               ),
             ),
           ),
@@ -166,25 +157,25 @@ class SearchMoshaf extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-        tooltip: AppLocalizations.of(context)!.clear,
+      Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: IconButton(
+          onPressed: () {
+            if (query.isNotEmpty) {
+              query = '';
+            } else {
+              close(context, false);
+            }
+          },
+          icon: const Icon(Icons.close),
+        ),
       ),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-      tooltip: AppLocalizations.of(context)!.back,
-    );
+    return const BuildIconBackWidget();
   }
 
   @override
@@ -201,7 +192,6 @@ class SearchMoshaf extends SearchDelegate {
     return ListView.separated(
       separatorBuilder: (context, index) {
         return const Divider(
-          color: AppColors.darkBlue,
           thickness: 0.3,
         );
       },
@@ -236,7 +226,6 @@ class SearchMoshaf extends SearchDelegate {
     return ListView.separated(
       separatorBuilder: (context, index) {
         return const Divider(
-          color: AppColors.darkBlue,
           thickness: 0.3,
         );
       },

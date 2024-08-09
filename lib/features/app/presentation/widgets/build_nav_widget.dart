@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/extension/blurry_widget.dart';
 
-import '../../../../core/utils/app_colors.dart';
+import '../../../../core/extension/blurry_widget.dart';
 import '../cubit/app_cubit.dart';
 import 'build_icon_nav.dart';
 
@@ -26,7 +25,6 @@ class BuildNavWidget extends StatelessWidget {
         height: 65,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
-          color: AppColors.transparent,
           borderRadius: BorderRadius.circular(25),
         ),
         child: ClipRRect(
@@ -44,15 +42,7 @@ class BuildNavWidget extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  border: Border.all(color: AppColors.white.withOpacity(0.3)),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.darkBlue.withOpacity(0.2),
-                      AppColors.darkBlue.withOpacity(0.2),
-                    ],
-                  ),
+                  border: Border.all(),
                 ),
               ),
               ButtonBar(

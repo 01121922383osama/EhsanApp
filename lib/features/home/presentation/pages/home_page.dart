@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../../../injection_container.dart' as di;
@@ -52,7 +51,8 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                                color: AppColors.darkBlue.withOpacity(0.4)),
+                              color: Colors.indigo.withOpacity(0.4),
+                            ),
                           ),
                           child: const ListTile(),
                         ).animate(
@@ -61,7 +61,6 @@ class HomePage extends StatelessWidget {
                           },
                         )..shimmer(
                             delay: const Duration(milliseconds: 800),
-                            color: AppColors.lightblue,
                           );
                       },
                     );
@@ -75,7 +74,7 @@ class HomePage extends StatelessWidget {
                             Text(
                               AppLocalizations.of(context)!.checkInternet,
                               style: const TextStyle(
-                                color: AppColors.red,
+                                color: Colors.red,
                               ),
                             ),
                             const SizedBox(height: 25),

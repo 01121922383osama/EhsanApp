@@ -14,15 +14,14 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.red,
+        // backgroundColor: AppColors.red,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
         elevation: 0,
         shadowColor: Colors.transparent,
         textStyle: AppTextStyles.textStyleFont20,
-        foregroundColor: AppColors.white,
-        padding: const EdgeInsets.all(0),
+         padding: const EdgeInsets.all(0),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         alignment: Alignment.center,
         minimumSize: Size(context.width * 0.9, 65),

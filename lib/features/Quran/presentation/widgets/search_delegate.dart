@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/quran.dart' as quran;
 
 import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/models/quran_list_model.dart';
 import '../pages/surah_page.dart';
 import '../widgets/leading_widget.dart';
@@ -58,30 +55,20 @@ class SearchQuran extends SearchDelegate {
             leading: LeadingWidget(index: result.index!),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
-              side: BorderSide(
-                color: context.read<ThemeCubit>().state
-                    ? AppColors.white.withOpacity(0.5)
-                    : AppColors.white,
-              ),
+              side: const BorderSide(),
             ),
             title: Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: result.surahEnglish,
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.black,
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                   TextSpan(
                     text: ' (${result.manyAyah})',
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.redDart,
+                    style: const TextStyle(
                       fontSize: 10,
                     ),
                   ),
@@ -131,30 +118,20 @@ class SearchQuran extends SearchDelegate {
             leading: LeadingWidget(index: suggestion.index!),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
-              side: BorderSide(
-                color: context.read<ThemeCubit>().state
-                    ? AppColors.white.withOpacity(0.5)
-                    : AppColors.white,
-              ),
+              side: const BorderSide(),
             ),
             title: Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: suggestion.surahEnglish,
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.black,
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
                   TextSpan(
                     text: ' (${suggestion.describeSurah})',
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.redDart,
+                    style: const TextStyle(
                       fontSize: 10,
                     ),
                   ),

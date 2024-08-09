@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
-import '../../../../../core/utils/app_colors.dart';
 import 'get_name_of_audio.dart';
 
 class IconRepeatIconShuffle extends StatelessWidget {
@@ -18,9 +17,8 @@ class IconRepeatIconShuffle extends StatelessWidget {
           builder: (context, snapshot) {
             final loopMode = snapshot.data ?? LoopMode.off;
             final icons = [
-              Icon(Icons.repeat, color: AppColors.black.withOpacity(0.5)),
-              const Icon(Icons.repeat, color: AppColors.redDart),
-              const Icon(Icons.repeat_one, color: AppColors.redDart),
+              const Icon(Icons.repeat),
+              const Icon(Icons.repeat_one),
             ];
             const cycleModes = [
               LoopMode.off,
@@ -44,10 +42,9 @@ class IconRepeatIconShuffle extends StatelessWidget {
             final shuffleModeEnabled = snapshot.data ?? false;
             return IconButton(
               icon: shuffleModeEnabled
-                  ? const Icon(Icons.shuffle, color: AppColors.redDart)
-                  : Icon(
+                  ? const Icon(Icons.shuffle)
+                  : const Icon(
                       Icons.shuffle,
-                      color: AppColors.black.withOpacity(0.5),
                     ),
               onPressed: () async {
                 final enable = !shuffleModeEnabled;

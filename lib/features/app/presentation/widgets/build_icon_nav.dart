@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/app_colors.dart';
+
 import '../../../../core/widgets/paints_app.dart';
 import '../cubit/app_cubit.dart';
 
@@ -59,8 +59,8 @@ class _BuildIconNavState extends State<BuildIconNav>
         child: Container(
           decoration: BoxDecoration(
             color: widget.state.index == widget.index
-                ? AppColors.white
-                : AppColors.lightgray,
+                ? Colors.white.withOpacity(0.2)
+                : Colors.grey.withOpacity(0.3),
             borderRadius: BorderRadius.circular(25),
           ),
           child: IconButton(
@@ -75,9 +75,6 @@ class _BuildIconNavState extends State<BuildIconNav>
                 widget.state.index == widget.index
                     ? widget.iconOne
                     : widget.iconTwo,
-                color: widget.state.index == widget.index
-                    ? AppColors.red
-                    : AppColors.black,
               ),
             ),
           ),

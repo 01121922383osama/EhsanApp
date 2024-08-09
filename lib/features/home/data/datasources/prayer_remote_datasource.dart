@@ -20,8 +20,6 @@ class PrayerRemoteDataSourceImpl implements PrayerRemoteDataSource {
     } else {
       Position currentPosition = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
-      // final currentDate = DateTime.now();
-      // final formattedDate = DateFormat('dd-MM-yyyy').format(currentDate);
       final formattedDate = DateTime.now().toIso8601String();
       final response = await apiConsumerService.get(
           url:

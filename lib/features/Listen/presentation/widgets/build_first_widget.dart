@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/extension/blurry_widget.dart';
 
-import '../../../../core/utils/app_colors.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import 'sound_effect.dart';
 
 class BuildFirstWidget extends StatelessWidget {
@@ -18,8 +14,8 @@ class BuildFirstWidget extends StatelessWidget {
         margin: const EdgeInsets.all(5),
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: AppColors.white.withOpacity(0.5),
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(),
         ),
         child: Column(
           children: [
@@ -29,10 +25,7 @@ class BuildFirstWidget extends StatelessWidget {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.listen,
-                    style: TextStyle(
-                      color: context.read<ThemeCubit>().state
-                          ? AppColors.white
-                          : AppColors.darkBlue,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -42,13 +35,13 @@ class BuildFirstWidget extends StatelessWidget {
                       curve: Curves.easeInOutQuart,
                       barCount: 50,
                       colors: [
-                        AppColors.darkBlue,
-                        AppColors.lightgray,
-                        AppColors.grey,
-                        AppColors.red,
-                        AppColors.primary,
-                        AppColors.redDart,
-                        AppColors.lightblue,
+                        Color(0xFF3F4871),
+                        Color(0xFFE8ECFF),
+                        Color(0xFF9E9E9E),
+                        Color(0xFFD84C59),
+                        Color(0xFF5768E0),
+                        Color(0xFF74080C),
+                        Color(0xFFE8ECFF),
                       ],
                       duration: [
                         1000,
@@ -67,15 +60,12 @@ class BuildFirstWidget extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               AppLocalizations.of(context)!.listToQuran,
-              style: TextStyle(
-                color: context.read<ThemeCubit>().state
-                    ? AppColors.white.withOpacity(0.5)
-                    : AppColors.darkBlue,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
           ],
-        ).blurry(),
+        ),
       ).animate().flip(),
     );
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/utils/app_colors.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 class BuildListTileWidget extends StatelessWidget {
@@ -22,18 +20,21 @@ class BuildListTileWidget extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: context.read<ThemeCubit>().state
-              ? AppColors.white.withOpacity(0.7)
-              : AppColors.white,
           borderRadius: BorderRadius.circular(8),
+          border: Border.all(),
         ),
         alignment: Alignment.center,
         child: ListTile(
-          title: Text(titlel),
+          title: Text(
+            titlel,
+            style: TextStyle(
+                color: context.read<ThemeCubit>().state
+                    ? Colors.white
+                    : Colors.black),
+          ),
           titleTextStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: AppColors.redDart,
           ),
           trailing: trailing,
         ),

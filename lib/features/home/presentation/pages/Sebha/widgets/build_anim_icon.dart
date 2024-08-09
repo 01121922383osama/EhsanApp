@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/utils/app_colors.dart';
 import '../SebehCubit/sabeh_cubit.dart';
 
 class AnimIconWidget extends StatefulWidget {
@@ -69,7 +68,7 @@ class _AnimIconWidgetState extends State<AnimIconWidget>
                     borderRadius: BorderRadius.circular(9999),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.red.withOpacity(
+                        color: Colors.red.withOpacity(
                           animationController.isCompleted
                               ? animation.value
                               : 0.5,
@@ -80,13 +79,13 @@ class _AnimIconWidgetState extends State<AnimIconWidget>
                   ),
                   child: CircleAvatar(
                     radius: widget.getDouble(i),
-                    backgroundColor: AppColors.transparent,
+                    backgroundColor: Colors.transparent,
                   ),
                 ),
               Icon(
                 widget.iconData,
                 size: 30,
-                color: AppColors.white,
+                color: Colors.white,
               ),
             ],
           );

@@ -76,5 +76,6 @@
     "profile": "Profile",
     "checkInternet": "Check your internet connection!",
     "loading": "Loading...",
-    "tryAgain": "Try Again."
+    "tryAgain": "Try Again.",
+    "fontsize": "FontSize"
 }
