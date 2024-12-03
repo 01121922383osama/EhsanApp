@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/utils/app_colors.dart';
-
 class BuildTextFieldWidget extends StatelessWidget {
   final String hintText;
   final bool inputAction;

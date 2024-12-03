@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:free_lancer/features/Setting/presentation/widgets/build_setting_widget.dart';
 
 import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
@@ -11,6 +10,7 @@ import '../cubit/ChangeFonts/change_fonts.dart';
 import '../cubit/Lang/change_language_cubit.dart';
 import '../cubit/Theme/theme_cubit.dart';
 import '../widgets/build_image.dart';
+import '../widgets/build_setting_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -34,60 +34,64 @@ class ProfilePage extends StatelessWidget {
                 ListTile(
                   title: Text(AppLocalizations.of(context)!.lang),
                   leading: const Icon(Icons.language),
-                  trailing: PopupMenuButton<int>(
-                    onSelected: (int value) {
-                      switch (value) {
-                        case 0:
-                          context
-                              .read<ChangeLanguageCubit>()
-                              .changeLang(lang: 'ar');
-                          break;
-                        case 1:
-                          context
-                              .read<ChangeLanguageCubit>()
-                              .changeLang(lang: 'en');
-                          break;
-                        case 2:
-                          context
-                              .read<ChangeLanguageCubit>()
-                              .changeLang(lang: 'fr');
-                          break;
-                      }
-                    },
-                    color: context.read<ThemeCubit>().state
-                        ? Colors.black
-                        : Colors.white,
-                    itemBuilder: (BuildContext context) {
-                      return <PopupMenuEntry<int>>[
-                        PopupMenuItem<int>(
-                          value: 0,
-                          child: Text(AppLocalizations.of(context)!.arabic),
-                        ),
-                        PopupMenuItem<int>(
-                          value: 1,
-                          child: Text(AppLocalizations.of(context)!.english),
-                        ),
-                        PopupMenuItem<int>(
-                          value: 2,
-                          child: Text(AppLocalizations.of(context)!.french),
-                        ),
-                      ];
+                  trailing: BlocBuilder<ThemeCubit, bool>(
+                    builder: (context, state) {
+                      return PopupMenuButton<int>(
+                        onSelected: (int value) {
+                          switch (value) {
+                            case 0:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'ar');
+                              break;
+                            case 1:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'en');
+                              break;
+                            case 2:
+                              context
+                                  .read<ChangeLanguageCubit>()
+                                  .changeLang(lang: 'fr');
+                              break;
+                          }
+                        },
+                        color: state
+                            ? Theme.of(context).secondaryHeaderColor
+                            : Theme.of(context).secondaryHeaderColor,
+                        itemBuilder: (BuildContext context) {
+                          return <PopupMenuEntry<int>>[
+                            PopupMenuItem<int>(
+                              value: 0,
+                              child: Text(AppLocalizations.of(context)!.arabic),
+                            ),
+                            PopupMenuItem<int>(
+                              value: 1,
+                              child:
+                                  Text(AppLocalizations.of(context)!.english),
+                            ),
+                            PopupMenuItem<int>(
+                              value: 2,
+                              child: Text(AppLocalizations.of(context)!.french),
+                            ),
+                          ];
+                        },
+                      );
                     },
                   ),
                 ),
                 BlocBuilder<ThemeCubit, bool>(
                   builder: (context, state) {
-                    return ListTile(
+                    return SwitchListTile.adaptive(
+                      secondary:
+                          Icon(state ? Icons.dark_mode : Icons.light_mode),
                       title: Text(state
                           ? AppLocalizations.of(context)!.dark
                           : AppLocalizations.of(context)!.light),
-                      leading: Icon(state ? Icons.dark_mode : Icons.light_mode),
-                      trailing: Switch.adaptive(
-                        value: context.read<ThemeCubit>().state,
-                        onChanged: (value) {
-                          context.read<ThemeCubit>().changeTheme();
-                        },
-                      ),
+                      value: state,
+                      onChanged: (value) {
+                        context.read<ThemeCubit>().changeTheme();
+                      },
                     );
                   },
                 ),
@@ -99,7 +103,7 @@ class ProfilePage extends StatelessWidget {
                       context: context,
                       builder: (context) {
                         return AlertDialog.adaptive(
-                          title: const Text('حجم الخط'),
+                          title: Text(AppLocalizations.of(context)!.fontsize),
                           content: BlocBuilder<ChangeFonts, double>(
                             builder: (context, state) {
                               return Column(
@@ -112,7 +116,7 @@ class ProfilePage extends StatelessWidget {
                                         child: Slider.adaptive(
                                           value: state,
                                           min: 18.0,
-                                          max: 30.0,
+                                          max: 40.0,
                                           divisions: 12,
                                           onChanged: (value) {
                                             context
@@ -139,7 +143,7 @@ class ProfilePage extends StatelessWidget {
                           actions: [
                             ElevatedButton(
                               onPressed: () => context.pop(),
-                              child: const Text('حسنا'),
+                              child: Text(AppLocalizations.of(context)!.yes),
                             ),
                           ],
                         );

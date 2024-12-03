@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../core/extension/extension.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/models/quran_list_model.dart';
 import '../pages/surah_page.dart';
 import 'leading_widget.dart';

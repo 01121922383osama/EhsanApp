@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/app_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../../../injection_container.dart' as di;
 import '../cubit/PrayerCubit/prayer_cubit.dart';
 import '../widgets/build_3_icon_widget.dart';
 import '../widgets/prayer_time.dart';
@@ -15,14 +14,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overScroll) {
-            overScroll.disallowIndicator();
-            return false;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overScroll) {
+          overScroll.disallowIndicator();
+          return false;
+        },
+        child: RefreshIndicator(
+          onRefresh: () async {
+            if (context.read<PrayerCubit>().state != PrayerSuccess ||
+                context.read<PrayerCubit>().state != PrayerFailure) {
+              context.read<PrayerCubit>().getPrayerTime();
+            }
           },
           child: CustomScrollView(
             primary: true,
@@ -40,6 +44,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              // const GetNextPrayerTime(),
               BlocBuilder<PrayerCubit, PrayerState>(
                 builder: (context, state) {
                   if (state is PrayerLoading) {

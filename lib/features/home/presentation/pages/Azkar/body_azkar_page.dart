@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
-import '../../../../../core/extension/extension.dart';
-import '../../../Quran/presentation/widgets/build_avatar_surah.dart';
-import '../pages/Azkar/cubit/azkar_cubit.dart';
+import '../../../../../../core/extension/extension.dart';
+import '../../../../Quran/presentation/widgets/build_avatar_surah.dart';
+import 'cubit/azkar_cubit.dart';
 import 'details_of_zek.dart';
 
 class BodyAzkarPage extends StatelessWidget {

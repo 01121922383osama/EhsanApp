@@ -27,27 +27,31 @@ class DetailsSurahWidget extends StatelessWidget {
             overScroll.disallowIndicator();
             return false;
           },
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text.rich(
-              textAlign: TextAlign.center,
-              textDirection: TextDirection.rtl,
-              TextSpan(
-                text: quran.getVerse(indexOfSurah! + 1, index + 1),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.read<ChangeFonts>().state,
+          child: BlocBuilder<ChangeFonts, double>(
+            builder: (context, state) {
+              return Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                children: [
-                  WidgetSpan(
-                    child: BuildAvatarNumber(index: index),
+                child: Text.rich(
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                  TextSpan(
+                    text: quran.getVerse(indexOfSurah! + 1, index + 1),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: state,
+                    ),
+                    children: [
+                      WidgetSpan(
+                        child: BuildAvatarNumber(index: index),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
           ),
         );
       },

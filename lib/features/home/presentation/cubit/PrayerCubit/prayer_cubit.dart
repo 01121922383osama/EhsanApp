@@ -7,14 +7,16 @@ import '../../../domain/usecases/prayer_time_usecases.dart';
 part 'prayer_state.dart';
 
 class PrayerCubit extends Cubit<PrayerState> {
-  final PrayerTimeUseCases prayerTimeUseCases;
-  PrayerCubit({required this.prayerTimeUseCases}) : super(PrayerInitial());
+  final PrayerTimeUseCases _prayerTimeUseCases;
+  PrayerCubit({required PrayerTimeUseCases prayerTimeUseCases})
+      : _prayerTimeUseCases = prayerTimeUseCases,
+        super(PrayerInitial());
 
   Future<void> getPrayerTime() async {
     try {
       emit(PrayerLoading());
-      final result = await prayerTimeUseCases.getPrayerTime();
-      emit(PrayerSuccess(prayerTime: result));
+      final result = await _prayerTimeUseCases.getPrayerTime();
+      emit(PrayerSuccess(prayerTime: result!));
     } catch (e) {
       emit(PrayerFailure(messageError: e.toString()));
     }

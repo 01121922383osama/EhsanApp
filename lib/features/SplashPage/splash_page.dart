@@ -16,7 +16,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 1300), () {
-      context.pushNamedAndRemoveUntil(pageRoute: RoutesName.loginscreen);
+      if (mounted) {
+        context.pushNamedAndRemoveUntil(pageRoute: RoutesName.app);
+      }
     });
     super.initState();
   }

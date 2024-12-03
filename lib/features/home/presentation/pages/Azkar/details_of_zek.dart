@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../core/widgets/custom_appbar.dart';
 
-import '../../../../core/utils/app_styles.dart';
-import '../../../../core/widgets/build_leading_widget.dart';
-import '../../../Quran/presentation/widgets/build_avatar_surah.dart';
-import '../pages/Azkar/models/array.dart';
+import '../../../../../core/utils/app_styles.dart';
+import '../../../../../core/widgets/build_leading_widget.dart';
+import '../../../../../core/widgets/custom_appbar.dart';
+import '../../../../Quran/presentation/widgets/build_avatar_surah.dart';
+import 'models/array.dart';
 
 class DetailsOfZekr extends StatelessWidget {
   final String title;

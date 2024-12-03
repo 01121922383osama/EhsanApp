@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/social_videos.dart';
 
 import '../cubit/listen_cubit.dart';
 import '../widgets/build_first_widget.dart';
@@ -25,6 +26,9 @@ class ListenPage extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             slivers: [
               const BuildFirstWidget(),
+              const SliverToBoxAdapter(
+                child: SocialVideos(),
+              ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),

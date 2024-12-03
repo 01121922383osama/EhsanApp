@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/extension/extension.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/build_leading_widget.dart';
 import '../../../../Quran/presentation/widgets/build_avatar_surah.dart';
-import '../../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
-import '../../widgets/details_of_zek.dart';
+import 'details_of_zek.dart';
 import 'cubit/azkar_cubit.dart';
 import 'models/zekr_model.dart';
 
@@ -58,11 +56,6 @@ class ZekrSearchDelegate extends SearchDelegate {
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    // side: BorderSide(
-                    //   color: context.read<ThemeCubit>().state
-                    //       ?
-                    //       :
-                    // ),
                   ),
                   leading: BuildAvatarNumber(index: index),
                   title: Text(zekr.category),
@@ -110,11 +103,6 @@ class ZekrSearchDelegate extends SearchDelegate {
                 child: ListTile(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    // side: BorderSide(
-                    //   color: context.read<ThemeCubit>().state
-                    //       ?
-                    //       :
-                    // ),
                   ),
                   leading: BuildAvatarNumber(
                     index: index,

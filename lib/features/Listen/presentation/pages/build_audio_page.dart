@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/widgets/custom_appbar.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 import '../../../Quran/presentation/widgets/search_delegate.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/models/models_urls.dart';

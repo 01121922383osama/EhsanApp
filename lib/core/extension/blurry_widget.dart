@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/blurry_container.dart';
 
 extension BlurryWidget<T extends Widget> on T {

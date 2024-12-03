@@ -15,6 +15,7 @@ import 'features/home/data/repositories/prayer_time_imple.dart';
 import 'features/home/domain/entities/prayer_time_entity.dart';
 import 'features/home/domain/repositories/prayer_time_repo.dart';
 import 'features/home/domain/usecases/prayer_time_usecases.dart';
+import 'features/home/presentation/cubit/GetNextPrayerTime/get_next_prayer_time_cubit.dart';
 import 'features/home/presentation/cubit/PrayerCubit/prayer_cubit.dart';
 
 final sl = GetIt.instance;
@@ -34,6 +35,8 @@ Future<void> init() async {
   // cubit
 
   sl.registerFactory(() => PrayerCubit(prayerTimeUseCases: sl.call()));
+  sl.registerFactory(
+      () => GetNextPrayerTimeCubit(prayerTimeUseCases: sl.call()));
   // repository
 
   sl.registerLazySingleton<PrayerTimeRepo>(() => PrayerTimeImple(

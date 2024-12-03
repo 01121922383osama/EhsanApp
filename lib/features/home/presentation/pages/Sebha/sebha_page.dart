@@ -17,129 +17,133 @@ class SebhaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      return Scaffold(
-        appBar: const CustomAppbar(
-          leading: BuildIconBackWidget(),
-        ),
-        body: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (notification) {
-            notification.disallowIndicator();
-            return true;
-          },
-          child: ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.all(8),
-                height: context.height * 0.5,
-                width: context.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(),
-                ),
-                child: BlocBuilder<ListOfSabehCubit, ListOfSabehState>(
-                  builder: (context, state) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 60,
-                          margin: const EdgeInsets.all(10),
-                          width: context.width,
-                          child: CustomDropdown<String>(
-                            headerBuilder: (context, selectedItem, enabled) {
-                              return Text(
-                                selectedItem,
-                                style: const TextStyle(
+      return BlocProvider(
+        create: (context) => ListOfSabehCubit(),
+        child: Scaffold(
+          appBar: const CustomAppbar(
+            leading: BuildIconBackWidget(),
+          ),
+          body: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (notification) {
+              notification.disallowIndicator();
+              return true;
+            },
+            child: ListView(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  height: context.height * 0.5,
+                  width: context.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(),
+                  ),
+                  child: BlocBuilder<ListOfSabehCubit, ListOfSabehState>(
+                    builder: (context, state) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 60,
+                            margin: const EdgeInsets.all(10),
+                            width: context.width,
+                            child: CustomDropdown<String>(
+                              headerBuilder: (context, selectedItem, enabled) {
+                                return Text(
+                                  selectedItem,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                );
+                              },
+                              hintText:
+                                  AppLocalizations.of(context)!.chooseZekr,
+                              items: state.listOfTasbeh,
+                              decoration: CustomDropdownDecoration(
+                                headerStyle: AppTextStyles.textStyleFont0Bold,
+                                listItemStyle: const TextStyle(
                                   color: Colors.black,
-                                  fontSize: 18,
+                                  fontSize: 15,
                                 ),
-                              );
-                            },
-                            hintText: AppLocalizations.of(context)!.chooseZekr,
-                            items: state.listOfSabeh,
-                            decoration: CustomDropdownDecoration(
-                              headerStyle: AppTextStyles.textStyleFont0Bold,
-                              listItemStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
                               ),
+                              initialItem: state.listOfTasbeh[0],
+                              onChanged: (value) {
+                                context
+                                    .read<ListOfSabehCubit>()
+                                    .chooseString(value: value);
+                                context.read<SabehCubit>().reset();
+                              },
                             ),
-                            initialItem: state.listOfSabeh[0],
-                            onChanged: (value) {
-                              context
-                                  .read<ListOfSabehCubit>()
-                                  .chooseString(value: value);
-                              context.read<SabehCubit>().reset();
-                            },
                           ),
-                        ),
-                        SizedBox(height: context.height * 0.1),
-                        Center(
-                          child:
-                              BlocBuilder<ListOfSabehCubit, ListOfSabehState>(
+                          SizedBox(height: context.height * 0.1),
+                          Center(
+                            child:
+                                BlocBuilder<ListOfSabehCubit, ListOfSabehState>(
+                              builder: (context, state) {
+                                return Text(
+                                  state.getValue,
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.textStyleFont20,
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: context.height * 0.1),
+                          BlocBuilder<SabehCubit, int>(
                             builder: (context, state) {
                               return Text(
-                                state.getValue,
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.textStyleFont20,
+                                '$state',
+                                style: AppTextStyles.textStyleFont30,
                               );
                             },
                           ),
-                        ),
-                        SizedBox(height: context.height * 0.1),
-                        BlocBuilder<SabehCubit, int>(
-                          builder: (context, state) {
-                            return Text(
-                              '$state',
-                              style: AppTextStyles.textStyleFont30,
-                            );
-                          },
-                        ),
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(8),
-                height: context.height * 0.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(),
-                ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    AnimIconWidget(
-                      getDouble: (p0) => getDouble1(p0),
-                      iconData: Icons.add,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: AnimIconWidget(
-                          getDouble: (p0) => getDouble2(p0),
-                          iconData: Icons.remove,
+                Container(
+                  margin: const EdgeInsets.all(8),
+                  height: context.height * 0.3,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      AnimIconWidget(
+                        getDouble: (p0) => getDouble1(p0),
+                        iconData: Icons.add,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: AnimIconWidget(
+                            getDouble: (p0) => getDouble2(p0),
+                            iconData: Icons.remove,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: AnimIconWidget(
-                          getDouble: (p0) => getDouble2(p0),
-                          iconData: Icons.restart_alt,
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: AnimIconWidget(
+                            getDouble: (p0) => getDouble2(p0),
+                            iconData: Icons.restart_alt,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

@@ -32,20 +32,21 @@
   <title>free_lancer</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
+  <!-- <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-  </script>
+    const flutter_service_worker_version = null;
+  </script> -->
   <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+  <!-- <script src="flutter.js" defer></script> -->
 </head>
 <body>
-  <script>
+  <script src="flutter_bootstrap.js" async></script>
+  <!-- <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
+      _FlutterLoader.load({
         serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
+          serviceWorkerVersion: flutter_service_worker_version,
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -54,6 +55,6 @@
         }
       });
     });
-  </script>
+  </script> -->
 </body>
 </html>

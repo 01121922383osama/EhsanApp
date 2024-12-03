@@ -6,7 +6,7 @@ class PrayerTimeUseCases {
 
   PrayerTimeUseCases({required this.prayerTimeRepo});
 
-  Future<PrayerTimeEntity> getPrayerTime() async {
+  Future<PrayerTimeEntity?> getPrayerTime() async {
     return await prayerTimeRepo.getPrayerTime();
   }
 }

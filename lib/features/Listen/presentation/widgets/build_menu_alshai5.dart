@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file3_10.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file4_9.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../Quran/presentation/widgets/leading_widget.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../../data/datasources/LocalDataSourceShaikh/export.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file1_12.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file1_13.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file1_14.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file1_15.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file2_9.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file3_11.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file5_12.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file5_13.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file5_18.dart';
 import '../../data/models/models_urls.dart';
 import '../pages/build_audio_page.dart';
 
@@ -56,6 +67,10 @@ List<List<Urls>> _list = [
   file1_9,
   file1_10,
   file1_11,
+  file1_12,
+  file1_13,
+  file1_14,
+  file1_15,
   file1_16,
   file1_17,
   file1_18,
@@ -74,6 +89,7 @@ List<List<Urls>> _list = [
   file2_6,
   file2_7,
   file2_8,
+  file2_9,
   file2_10,
   file2_11,
   file2_12,
@@ -95,6 +111,8 @@ List<List<Urls>> _list = [
   file3_7,
   file3_8,
   file3_9,
+  file3_10,
+  file3_11,
   file3_12,
   file3_13,
   file3_14,
@@ -117,6 +135,7 @@ List<List<Urls>> _list = [
   file4_6,
   file4_7,
   file4_8,
+  file4_9,
   file4_10,
   file4_11,
   file4_12,
@@ -139,8 +158,11 @@ List<List<Urls>> _list = [
   file5_7,
   file5_8,
   file5_9,
+  file5_12,
+  file5_13,
   file5_16,
   file5_17,
+  file5_18,
   file5_20,
   file5_21,
   file6_4,

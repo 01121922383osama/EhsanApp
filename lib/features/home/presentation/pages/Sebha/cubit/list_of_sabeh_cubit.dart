@@ -5,20 +5,19 @@ part 'list_of_sabeh_state.dart';
 
 class ListOfSabehCubit extends Cubit<ListOfSabehState> {
   ListOfSabehCubit()
-      : super(ListOfSabehInitial(listOfSabeh: _list, getValue: _list[0]));
+      : super(ListOfSabehInitial(listOfTasbeh: _list, getValue: _list[0]));
   void chooseString({String? value}) {
-    emit(ListOfSabehInitial(listOfSabeh: _list, getValue: value ?? _list[0]));
+    emit(ListOfSabehInitial(listOfTasbeh: _list, getValue: value ?? _list[0]));
   }
 }
 
 List<String> _list = [
   'سُبْحَانَ اللَّهِ',
   'الحمد لله',
-  'اللَّهِ اكبر',
-  'لا اله الا اللَّهِ',
+  'اللّه اكبر',
+  'لا اله الا اللَّه',
   'لا حول ولا قوة الا بالله',
-  'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',
   'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ',
-  'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',
-  'سُبْحَانَ اللَّهِ الْعَظِيمِ وَبِحَمْدِهِ',
+  'سُبْحَانَ اللَّه وَبِحَمْدِهِ',
+  'سُبْحَانَ اللَّه الْعَظِيمِ وَبِحَمْدِهِ',
 ];

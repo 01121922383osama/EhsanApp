@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'build_leading_widget.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
@@ -19,18 +20,15 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        scrolledUnderElevation: scrolledUnderElevation,
-        backgroundColor: Colors.transparent,
-        leading: leading,
-        title: title,
-        centerTitle: centerTitle,
-        actions: actions,
-      ),
+    return AppBar(
+      automaticallyImplyLeading: false,
+      elevation: 0,
+      scrolledUnderElevation: scrolledUnderElevation,
+      backgroundColor: color,
+      leading: leading ?? const BuildIconBackWidget(),
+      title: title,
+      centerTitle: centerTitle,
+      actions: actions,
     );
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/widgets/custom_appbar.dart';
 
 import '../../../../../core/widgets/build_leading_widget.dart';
+import '../../../../../core/widgets/custom_appbar.dart';
 import 'cubit/asmaa_hosna_cubit.dart';
 import 'models/details_asmaa_allah.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/widgets/custom_appbar.dart';
 
 import '../../../../core/widgets/build_leading_widget.dart';
+import '../../../../core/widgets/custom_appbar.dart';
 import '../widgets/build_sora_widget.dart';
 import '../widgets/search_delegate.dart';
 

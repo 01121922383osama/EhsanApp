@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../cubit/Theme/theme_cubit.dart';
 
 class BuildSettingsWidget extends StatelessWidget {
   final List<Widget> widgets;

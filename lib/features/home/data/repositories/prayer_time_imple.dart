@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../core/Network/network_info.dart';
@@ -19,25 +20,27 @@ class PrayerTimeImple implements PrayerTimeRepo {
   });
 
   @override
-  Future<PrayerTimeEntity> getPrayerTime() async {
+  Future<PrayerTimeEntity?> getPrayerTime() async {
     if (await networkInfo.isConnected) {
+      final box = Hive.box<PrayerTimeEntity>(AppString.keyPrayerTime);
       final prayerTime = await remoteDataSource.getPrayerTime();
-      saveBooksData(
+      await box.clear();
+      savePrayersData(
         prayerData: prayerTime!,
-        boxName: AppString.keyPrayerTime,
       );
       return prayerTime;
     } else {
-      final localData = await localDataSource.getPrayerTime();
-      return localData.first;
+      final localData = localDataSource.getPrayerTime();
+      return localData;
     }
   }
 }
 
-void saveBooksData({
-  required PrayerTimeEntity prayerData,
-  required String boxName,
-}) {
-  var box = Hive.box<PrayerTimeEntity>(boxName);
-  box.add(prayerData);
+Future<void> savePrayersData({required PrayerTimeEntity prayerData}) async {
+  try {
+    final box = Hive.box<PrayerTimeEntity>(AppString.keyPrayerTime);
+    await box.put(AppString.keyPrayerTime, prayerData);
+  } catch (e) {
+    debugPrint("Error saving prayer time data locally: $e");
+  }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:free_lancer/features/Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../../../../core/extension/extension.dart';
+import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../widgets/details_surah.dart';
 
 class SurahPage extends StatelessWidget {
@@ -31,6 +34,63 @@ class SurahPage extends StatelessWidget {
                 bottom: Radius.circular(8),
               ),
             ),
+            actions: [
+              BuildIconBackWidget(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog.adaptive(
+                        title: Text(AppLocalizations.of(context)!.fontsize),
+                        content: BlocBuilder<ChangeFonts, double>(
+                          builder: (context, state) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Text('18'),
+                                    Expanded(
+                                      child: Slider.adaptive(
+                                        value: state,
+                                        min: 18.0,
+                                        max: 40.0,
+                                        divisions: 12,
+                                        onChanged: (value) {
+                                          context
+                                              .read<ChangeFonts>()
+                                              .changeFont(value);
+                                        },
+                                      ),
+                                    ),
+                                    Text(state.floor().toString()),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  AppLocalizations.of(context)!.holyQuran,
+                                  style: TextStyle(
+                                    fontSize: state,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                        actionsAlignment: MainAxisAlignment.start,
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () => context.pop(),
+                            child: Text(AppLocalizations.of(context)!.yes),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.font_download_rounded),
+              )
+            ],
           ),
           const SpaceWidget(height: 15),
           SliverToBoxAdapter(

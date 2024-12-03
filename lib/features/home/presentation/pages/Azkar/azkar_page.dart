@@ -4,7 +4,7 @@ import '../../../../../core/widgets/custom_appbar.dart';
 
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/build_leading_widget.dart';
-import '../../widgets/body_azkar_page.dart';
+import 'body_azkar_page.dart';
 import 'search_zekr.dart';
 
 class AzkarPage extends StatelessWidget {
