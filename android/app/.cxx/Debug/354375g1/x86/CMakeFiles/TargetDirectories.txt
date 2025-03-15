@@ -1,0 +1,2 @@
+/Users/click/Documents/GitHub/Flutter_Projects/EhsanApp/android/app/.cxx/Debug/354375g1/x86/CMakeFiles/edit_cache.dir
+/Users/click/Documents/GitHub/Flutter_Projects/EhsanApp/android/app/.cxx/Debug/354375g1/x86/CMakeFiles/rebuild_cache.dir

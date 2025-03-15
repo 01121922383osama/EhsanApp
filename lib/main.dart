@@ -31,7 +31,9 @@ class QuranApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => ChangeFonts(), lazy: true),
         BlocProvider(
-            create: (context) => AzkarCubit()..getZekrData(), lazy: true),
+          create: (context) => AzkarCubit()..getZekrData(),
+          lazy: true,
+        ),
         BlocProvider(create: (context) => ChangeLanguageCubit(), lazy: true),
         BlocProvider(create: (context) => ThemeCubit(), lazy: true),
         BlocProvider(create: (context) => AppCubit(), lazy: true),

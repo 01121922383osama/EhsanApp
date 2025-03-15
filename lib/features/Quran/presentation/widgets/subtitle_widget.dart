@@ -18,30 +18,33 @@ class SubTitelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            CircleWidget(
-              text: revelationType,
-              svgImage: AssetsSvg.ka3ba,
-            ),
-            Container(
-              padding: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(),
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              CircleWidget(
+                text: revelationType,
+                svgImage: AssetsSvg.ka3ba,
               ),
-            ),
-            CircleWidget(
-              text: '$manyAyah ${AppLocalizations.of(context)!.ayat} ',
-              svgImage: AssetsSvg.smallBook,
-            ),
-          ],
-        ),
-        TrailingWidget(suraName: surahName),
-      ],
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(),
+                ),
+              ),
+              CircleWidget(
+                text: '$manyAyah ${AppLocalizations.of(context)!.ayat} ',
+                svgImage: AssetsSvg.smallBook,
+              ),
+            ],
+          ),
+          TrailingWidget(suraName: surahName),
+        ],
+      ),
     );
   }
 }

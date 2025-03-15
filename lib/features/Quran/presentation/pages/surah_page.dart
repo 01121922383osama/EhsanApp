@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../core/extension/extension.dart';
-import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 
+import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../widgets/details_surah.dart';
 
@@ -51,16 +51,19 @@ class SurahPage extends StatelessWidget {
                                   children: [
                                     const Text('18'),
                                     Expanded(
-                                      child: Slider.adaptive(
-                                        value: state,
-                                        min: 18.0,
-                                        max: 40.0,
-                                        divisions: 12,
-                                        onChanged: (value) {
-                                          context
-                                              .read<ChangeFonts>()
-                                              .changeFont(value);
-                                        },
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: Slider.adaptive(
+                                          value: state,
+                                          min: 18.0,
+                                          max: 40.0,
+                                          divisions: 12,
+                                          onChanged: (value) {
+                                            context
+                                                .read<ChangeFonts>()
+                                                .changeFont(value);
+                                          },
+                                        ),
                                       ),
                                     ),
                                     Text(state.floor().toString()),

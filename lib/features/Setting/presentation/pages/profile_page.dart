@@ -113,16 +113,19 @@ class ProfilePage extends StatelessWidget {
                                     children: [
                                       const Text('18'),
                                       Expanded(
-                                        child: Slider.adaptive(
-                                          value: state,
-                                          min: 18.0,
-                                          max: 40.0,
-                                          divisions: 12,
-                                          onChanged: (value) {
-                                            context
-                                                .read<ChangeFonts>()
-                                                .changeFont(value);
-                                          },
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: Slider.adaptive(
+                                            value: state,
+                                            min: 18.0,
+                                            max: 40.0,
+                                            divisions: 12,
+                                            onChanged: (value) {
+                                              context
+                                                  .read<ChangeFonts>()
+                                                  .changeFont(value);
+                                            },
+                                          ),
                                         ),
                                       ),
                                       Text(state.floor().toString()),

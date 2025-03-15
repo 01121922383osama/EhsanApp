@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../../core/widgets/custom_appbar.dart';
@@ -13,6 +14,13 @@ class QuranPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppbar(
         leading: const BuildIconBackWidget(),
+        centerTitle: true,
+        title: Text(
+          AppLocalizations.of(context)!.holyQuran,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           BuildIconBackWidget(
             icon: const Icon(Icons.search),
