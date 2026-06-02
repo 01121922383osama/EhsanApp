@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:free_lancer/l10n/app_localizations.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
@@ -51,16 +50,19 @@ class SurahPage extends StatelessWidget {
                                   children: [
                                     const Text('18'),
                                     Expanded(
-                                      child: Slider.adaptive(
-                                        value: state,
-                                        min: 18.0,
-                                        max: 40.0,
-                                        divisions: 12,
-                                        onChanged: (value) {
-                                          context
-                                              .read<ChangeFonts>()
-                                              .changeFont(value);
-                                        },
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: Slider.adaptive(
+                                          value: state,
+                                          min: 18.0,
+                                          max: 40.0,
+                                          divisions: 12,
+                                          onChanged: (value) {
+                                            context
+                                                .read<ChangeFonts>()
+                                                .changeFont(value);
+                                          },
+                                        ),
                                       ),
                                     ),
                                     Text(state.floor().toString()),
