@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../../core/widgets/custom_appbar.dart';

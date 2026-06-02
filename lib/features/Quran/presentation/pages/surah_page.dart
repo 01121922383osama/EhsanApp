@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
