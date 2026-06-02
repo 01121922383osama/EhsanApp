@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/app_durations.dart';
+
 class SlideToLeft extends PageRouteBuilder {
-  final Widget page;
   SlideToLeft({
-    required this.page,
+    required Widget page,
   }) : super(
-          pageBuilder: (context, animation1, animation2) => page,
-          transitionsBuilder: (context, animation1, animation2, child) {
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: AppDurations.pageTransition,
+          reverseTransitionDuration: AppDurations.pageTransition,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curved = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+              reverseCurve: Curves.easeInCubic,
+            );
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(1, 0),
                 end: Offset.zero,
-              ).animate(animation1),
+              ).animate(curved),
               child: child,
             );
           },

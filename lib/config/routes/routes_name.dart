@@ -17,4 +17,12 @@ class RoutesName {
   static const String aboutUs = '/about_us_page';
   static const String hadith = '/hadith_page';
   static const String doaa = '/doaa_us_page';
+  
+  // Library routes
+  static const String ahadethPage = '/ahadeth_page';
+  static const String azkarPage = '/azkar_page';
+  static const String ad3yaPage = '/ad3ya_page';
+  static const String hajjPage = '/hajj_page';
+  static const String seerahPage = '/seerah_page';
+  static const String ramadanPage = '/ramadan_page';
 }

@@ -49,6 +49,15 @@
     "popular": "الشائع",
     "volume": "مستوى الصوت",
     "speed": "مستوى السرعة",
+    "addCustomZekr": "إضافة ذكر مخصص",
+    "enterCustomZekr": "أدخل الذكر المخصص",
+    "cancel": "إلغاء",
+    "add": "إضافة",
+    "editCustomZekr": "تعديل الذكر المخصص",
+    "deleteCustomZekr": "حذف الذكر المخصص",
+    "deleteCustomZekrConfirm": "هل أنت متأكد أنك تريد حذف هذا الذكر المخصص؟",
+    "save": "حفظ",
+    "delete": "حذف",
     "holyQuran": "القرآن الكريم",
     "tfsir": "تفسير",
     "fajr": "الفجر",
@@ -69,6 +78,10 @@
     "jobTitleBilal": "مصمم Ui / Ux",
     "descriptionBilal": "هذا النص هو مثال على نص يمكن استبداله في نفس المساحة. تم إنشاء هذا النص من مولد النصوص العربي، حيث يمكنك إنشاء مثل هذا النص أو العديد من النصوص الأخرى بالإضافة إلى زيادة عدد الحروف التي يولدها التطبيق.",
     "prayerTimes": "مواقيت الصلاة",
+    "nextPrayer": "الصلاة القادمة",
+    "timeRemaining": "الوقت المتبقي",
+    "prayerPassed": "تمت",
+    "currentPrayerPeriod": "بعد صلاة {name}",
     "chooseZekr": "اختر الذكر الذي تريده",
     "plzEnterSomeText": "الرجاء إدخال بعض النصوص",
     "home": "الصفحة الرئيسية",
@@ -77,5 +90,48 @@
     "checkInternet": "تحقق من الإتصال بالإنترنت!",
     "loading": "جاري التحميل...",
     "tryAgain": "أعد المحاوله.",
-    "fontsize": "حجم الخط"
+    "fontsize": "حجم الخط",
+    "library": "المكتبة",
+    "ahadeth": "الأحاديث",
+    "azkar": "الأذكار",
+    "ad3ya": "الأدعية",
+    "hajj": "الحج والعمرة",
+    "seerah": "السيرة النبوية",
+    "ramadan": "رمضان",
+    "ahadith": "الأحاديث",
+    "asmaaAllahTitle": "أسماء الله الحسنى",
+    "zekrTapHint": "اضغط لعد الذكر",
+    "zekrCompleted": "مكتمل",
+    "zekrInProgress": "قيد القراءة",
+    "zekrNotStarted": "لم يبدأ",
+    "zekrRepeatCount": "{current} / {total}",
+    "@zekrRepeatCount": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrSequence": "{current} من {total}",
+    "@zekrSequence": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrCompletedSummary": "{done} من {total} مكتمل",
+    "@zekrCompletedSummary": {
+        "placeholders": {
+            "done": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "elements": "عناصر",
+    "search": "ابحث",
+    "youtubeTitle": "فيديوهات دينية",
+    "youtubePoweredBy": "مدعوم من YouTube — محتوى من قنوات عامة",
+    "youtubeNoVideos": "لا توجد فيديوهات متاحة حالياً",
+    "youtubeOpenExternal": "فتح في YouTube",
+    "youtubeTapToPlay": "اضغط للتشغيل داخل التطبيق",
+    "youtubePlayInApp": "إعادة المحاولة",
+    "youtubePlayerFailed": "تعذّر تحميل المشغّل. جرّب فتح الفيديو في YouTube أو على جهاز حقيقي"
 }

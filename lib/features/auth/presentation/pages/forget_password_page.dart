@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/assets_svg.dart';

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/datasources/LocalDataSourceShaikh/urls_file3_10.dart';
-import '../../data/datasources/LocalDataSourceShaikh/urls_file4_9.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/extension/extension.dart';
-import '../../../../core/widgets/build_leading_widget.dart';
-import '../../../Quran/presentation/widgets/leading_widget.dart';
-import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
+import '../../../../core/utils/app_durations.dart';
+import '../../../home/presentation/widgets/home_feature_ui.dart';
 import '../../data/datasources/LocalDataSourceShaikh/export.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file1_12.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file1_13.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file1_14.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file1_15.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file2_9.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file3_10.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file3_11.dart';
+import '../../data/datasources/LocalDataSourceShaikh/urls_file4_9.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file5_12.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file5_13.dart';
 import '../../data/datasources/LocalDataSourceShaikh/urls_file5_18.dart';
@@ -25,36 +24,28 @@ class BuildMenuShai5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemCount: _list.length,
-      itemBuilder: (context, index) {
-        return Scrollbar(
-          child: Card(
-            color: context.read<ThemeCubit>().state
-                ? Colors.transparent
-                : Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              onTap: () {
-                context.push(
-                  widget: BuildAudioPage(
-                    audioUrl: _list[index],
-                  ),
-                );
-              },
-              leading: LeadingWidget(index: index),
-              title: Text(
-                _list[index][index].title1,
-              ),
-            ),
-          ),
-        );
-      },
+    return SliverPadding(
+      padding: HomeFeatureUi.pagePadding.copyWith(top: 0),
+      sliver: SliverList.builder(
+        itemCount: _list.length,
+        itemBuilder: (context, index) {
+          final reciter = _list[index];
+          if (reciter.isEmpty) return const SizedBox.shrink();
+
+          return HomeFeatureUi.categoryTile(
+            context: context,
+            index: index,
+            title: reciter.first.title1,
+            onTap: () {
+              context.push(
+                widget: BuildAudioPage(audioUrl: reciter),
+              );
+            },
+          )
+              .animate(delay: (20 * (index % 8)).ms)
+              .fadeIn(duration: AppDurations.animation);
+        },
+      ),
     );
   }
 }
@@ -176,95 +167,73 @@ List<List<Urls>> _list = [
 ];
 
 class SearchMoshaf extends SearchDelegate {
+  List<List<Urls>> _filter() {
+    if (query.trim().isEmpty) return _list;
+    final q = query.toLowerCase();
+    final results = <List<Urls>>[];
+    for (final reciter in _list) {
+      if (reciter.isEmpty) continue;
+      if (reciter.first.title1.toLowerCase().contains(q)) {
+        results.add(reciter);
+      }
+    }
+    return results;
+  }
+
+  Widget _buildList(BuildContext context, List<List<Urls>> items) {
+    if (items.isEmpty) {
+      return HomeFeatureUi.emptyState(context, 'لا توجد نتائج');
+    }
+
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: HomeFeatureUi.pagePadding,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final reciter = items[index];
+        return HomeFeatureUi.categoryTile(
+          context: context,
+          index: index,
+          title: reciter.first.title1,
+          onTap: () {
+            close(context, reciter.first.title1);
+            context.pushReplacement(
+              widget: BuildAudioPage(audioUrl: reciter),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: IconButton(
-          onPressed: () {
-            if (query.isNotEmpty) {
-              query = '';
-            } else {
-              close(context, false);
-            }
-          },
-          icon: const Icon(Icons.close),
-        ),
+      IconButton(
+        onPressed: () {
+          if (query.isNotEmpty) {
+            query = '';
+            showSuggestions(context);
+          } else {
+            close(context, false);
+          }
+        },
+        icon: const Icon(Icons.close_rounded, size: 22),
       ),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return const BuildIconBackWidget();
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<List<Urls>> result = [];
-    for (var i = 0; i < _list.length; i++) {
-      for (var j = 0; j < _list[i].length; j++) {
-        if (_list[i][j].title1.toLowerCase().contains(query.toLowerCase())) {
-          result.add(_list[i]);
-          break;
-        }
-      }
-    }
-    return ListView.separated(
-      separatorBuilder: (context, index) {
-        return const Divider(
-          thickness: 0.3,
-        );
-      },
-      itemCount: result.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            context.pushReplacement(
-              widget: BuildAudioPage(
-                audioUrl: result[index],
-              ),
-            );
-          },
-          leading: LeadingWidget(index: index),
-          title: Text(result[index][0].title1),
-        );
-      },
+    return IconButton(
+      onPressed: () => close(context, false),
+      icon: const Icon(Icons.arrow_back_rounded, size: 22),
     );
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    List<List<Urls>> suggestions = [];
-    for (var i = 0; i < _list.length; i++) {
-      for (var j = 0; j < _list[i].length; j++) {
-        if (_list[i][j].title1.toLowerCase().contains(query.toLowerCase())) {
-          suggestions.add(_list[i]);
-          break;
-        }
-      }
-    }
-    return ListView.separated(
-      separatorBuilder: (context, index) {
-        return const Divider(
-          thickness: 0.3,
-        );
-      },
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () {
-            context.pushReplacement(
-              widget: BuildAudioPage(
-                audioUrl: suggestions[index],
-              ),
-            );
-          },
-          leading: LeadingWidget(index: index),
-          title: Text(suggestions[index][0].title1),
-        );
-      },
-    );
-  }
+  Widget buildResults(BuildContext context) => _buildList(context, _filter());
+
+  @override
+  Widget buildSuggestions(BuildContext context) => _buildList(context, _filter());
 }

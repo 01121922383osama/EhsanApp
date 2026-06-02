@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
-import '../../../../core/utils/app_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../cubit/PrayerCubit/prayer_cubit.dart';
 import '../widgets/build_3_icon_widget.dart';
+import '../widgets/home_prayer_ui.dart';
+import '../widgets/next_prayer_section.dart';
 import '../widgets/prayer_time.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,28 +24,16 @@ class HomePage extends StatelessWidget {
         },
         child: RefreshIndicator(
           onRefresh: () async {
-            if (context.read<PrayerCubit>().state != PrayerSuccess ||
-                context.read<PrayerCubit>().state != PrayerFailure) {
-              context.read<PrayerCubit>().getPrayerTime();
-            }
+            await context.read<PrayerCubit>().getPrayerTime();
           },
           child: CustomScrollView(
             primary: true,
             slivers: [
-              const SpaceWidget(),
+              const SpaceWidget(height: 8),
+              const NextPrayerSection(),
+              const SpaceWidget(height: HomePrayerUi.sectionTitleGap),
               const Build3IconWidget(),
-              const SpaceWidget(height: 30),
-              SliverToBoxAdapter(
-                child: Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.prayerTimes,
-                      style: AppTextStyles.textStyleFont15WoColor,
-                    ),
-                  ],
-                ),
-              ),
-              // const GetNextPrayerTime(),
+              const SpaceWidget(height: HomePrayerUi.sectionTitleGap),
               BlocBuilder<PrayerCubit, PrayerState>(
                 builder: (context, state) {
                   if (state is PrayerLoading) {
@@ -52,14 +41,18 @@ class HomePage extends StatelessWidget {
                       itemCount: 6,
                       itemBuilder: (context, index) {
                         return Container(
-                          margin: const EdgeInsets.all(5),
+                          height: HomePrayerUi.listRowHeight,
+                          margin: const EdgeInsetsDirectional.only(
+                            bottom: HomePrayerUi.itemGap,
+                          ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(
+                              HomePrayerUi.radius,
+                            ),
                             border: Border.all(
-                              color: Colors.indigo.withOpacity(0.4),
+                              color: Colors.indigo.withOpacity(0.25),
                             ),
                           ),
-                          child: const ListTile(),
                         ).animate(
                           onComplete: (controller) {
                             controller.repeat();

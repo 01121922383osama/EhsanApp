@@ -1,46 +1,73 @@
 import 'package:flutter/material.dart';
 
 class MusicVisualizer extends StatelessWidget {
+  const MusicVisualizer({
+    super.key,
+    required this.colors,
+    required this.duration,
+    this.barCount,
+    this.curve = Curves.easeInQuad,
+  });
+
   final List<Color>? colors;
   final List<int>? duration;
   final int? barCount;
   final Curve? curve;
 
-  const MusicVisualizer({
-    super.key,
-    required this.colors,
-    required this.duration,
-    required this.barCount,
-    this.curve = Curves.easeInQuad,
-  });
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List<Widget>.generate(
-        barCount!,
-        (index) => VisualComponent(
-          curve: curve!,
-          duration: duration![index % 5],
-          color: colors![index % 4],
-        ),
-      ),
+    final palette = colors ?? const [Colors.grey];
+    final timings = duration ?? const [1000];
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const barWidth = 3.0;
+        const gap = 2.0;
+        final maxBars = ((constraints.maxWidth + gap) / (barWidth + gap))
+            .floor()
+            .clamp(12, 80);
+        final count = barCount != null && barCount! < maxBars ? barCount! : maxBars;
+
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List<Widget>.generate(
+            count,
+            (index) => Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(
+                  end: index == count - 1 ? 0 : gap,
+                ),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: VisualComponent(
+                    curve: curve ?? Curves.easeInQuad,
+                    duration: timings[index % timings.length],
+                    color: palette[index % palette.length],
+                    barWidth: barWidth,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
 
 class VisualComponent extends StatefulWidget {
-  final int? duration;
-  final Color? color;
-  final Curve? curve;
-
   const VisualComponent({
     super.key,
     required this.duration,
     required this.color,
     required this.curve,
+    required this.barWidth,
   });
+
+  final int duration;
+  final Color color;
+  final Curve curve;
+  final double barWidth;
 
   @override
   State<VisualComponent> createState() => _VisualComponentState();
@@ -48,47 +75,42 @@ class VisualComponent extends StatefulWidget {
 
 class _VisualComponentState extends State<VisualComponent>
     with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController animationController;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    animate();
+    _controller = AnimationController(
+      duration: Duration(milliseconds: widget.duration),
+      vsync: this,
+    );
+    _animation = Tween<double>(begin: 4, end: 44).animate(
+      CurvedAnimation(parent: _controller, curve: widget.curve),
+    );
+    _controller.repeat(reverse: true);
   }
 
   @override
   void dispose() {
-    animation.removeListener(() {});
-    animationController.dispose();
+    _controller.dispose();
     super.dispose();
-  }
-
-  void animate() {
-    animationController = AnimationController(
-        duration: Duration(milliseconds: widget.duration!), vsync: this);
-    final curvedAnimation =
-        CurvedAnimation(parent: animationController, curve: widget.curve!);
-    animation = Tween<double>(begin: 0, end: 50).animate(curvedAnimation)
-      ..addListener(() {
-        update();
-      });
-    animationController.repeat(reverse: true);
-  }
-
-  void update() {
-    if (mounted) setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 3,
-      height: animation.value,
-      decoration: BoxDecoration(
-        color: widget.color,
-        borderRadius: BorderRadius.circular(5),
-      ),
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Container(
+          width: widget.barWidth,
+          height: _animation.value,
+          decoration: BoxDecoration(
+            color: widget.color,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        );
+      },
     );
   }
 }

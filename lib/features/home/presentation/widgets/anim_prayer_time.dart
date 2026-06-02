@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
+import 'home_prayer_ui.dart';
 
 class AnimPrayerTime extends StatefulWidget {
-  final String image;
-  final String prayerName;
-  final String time;
-  final Widget widget;
-  final int index;
   const AnimPrayerTime({
     super.key,
     required this.image,
     required this.time,
     required this.prayerName,
-    required this.widget,
     required this.index,
+    this.isNext = false,
   });
+
+  final String image;
+  final String prayerName;
+  final String time;
+  final int index;
+  final bool isNext;
 
   @override
   State<AnimPrayerTime> createState() => _AnimPrayerTimeState();
@@ -25,71 +27,100 @@ class AnimPrayerTime extends StatefulWidget {
 
 class _AnimPrayerTimeState extends State<AnimPrayerTime>
     with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  late Animation<Offset> animation;
+  late AnimationController _slideController;
+  late Animation<Offset> _slideAnimation;
+
   @override
   void initState() {
-    animationController = AnimationController(
+    super.initState();
+    _slideController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    animation = Tween<Offset>(
-      begin: const Offset(0.0, 0.0),
-      end: const Offset(-0.3, 0.3),
+    _slideAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(-0.2, 0.2),
     ).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.linear,
-      ),
+      CurvedAnimation(parent: _slideController, curve: Curves.easeInOut),
     );
-    animationController.repeat(reverse: true);
-    super.initState();
+    if (widget.isNext) {
+      _slideController.repeat(reverse: true);
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant AnimPrayerTime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isNext && !_slideController.isAnimating) {
+      _slideController.repeat(reverse: true);
+    } else if (!widget.isNext && _slideController.isAnimating) {
+      _slideController.stop();
+      _slideController.value = 0;
+    }
   }
 
   @override
   void dispose() {
-    animationController.dispose();
+    _slideController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final prayerColor = AppColors.paryersTime[widget.index];
+    final onColor = HomePrayerUi.readableOn(prayerColor);
+    final mutedOnColor = onColor.withOpacity(0.72);
+
     return Container(
       width: context.width,
-      height: 70,
-      margin: const EdgeInsetsDirectional.all(3),
-      decoration: BoxDecoration(
-        color: AppColors.paryersTime[widget.index].withOpacity(0.3),
-        borderRadius: BorderRadius.circular(8),
+      height: HomePrayerUi.listRowHeight,
+      margin: const EdgeInsetsDirectional.only(bottom: HomePrayerUi.itemGap),
+      decoration: HomePrayerUi.prayerCardDecoration(
+        prayerColor: prayerColor,
+        highlighted: widget.isNext,
+        withShadow: widget.isNext,
       ),
+      clipBehavior: Clip.antiAlias,
       child: Stack(
         alignment: Alignment.center,
         children: [
           PositionedDirectional(
-            end: 15,
-            child: widget.widget,
+            top: -10,
+            end: -10,
+            child: HomePrayerUi.accentOrb(onColor, size: 36),
           ),
           SlideTransition(
-            position: animation,
+            position: _slideAnimation,
             child: Image.asset(
               widget.image,
-              height: 35,
-              alignment: Alignment.center,
+              height: HomePrayerUi.listIconSize,
+              width: HomePrayerUi.listIconSize,
             ),
           ),
           PositionedDirectional(
-            start: 15,
-            child: Column(
-              children: [
-                Text(
-                  widget.prayerName,
-                  style: AppTextStyles.textStyleFont20,
-                ),
-                Text(
-                  widget.time,
-                  style: AppTextStyles.textStyleFont20,
-                ),
-              ],
+            start: HomePrayerUi.horizontalInset,
+            child: Text(
+              widget.prayerName,
+              style: AppTextStyles.textStyleFont20.copyWith(
+                color: onColor,
+                fontSize: 15,
+                fontWeight: widget.isNext ? FontWeight.w800 : FontWeight.w700,
+                height: 1,
+              ),
+              textDirection: TextDirection.rtl,
+            ),
+          ),
+          PositionedDirectional(
+            end: HomePrayerUi.horizontalInset,
+            child: Text(
+              widget.time,
+              style: AppTextStyles.textStyleFont16.copyWith(
+                color: mutedOnColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                height: 1,
+              ),
+              textDirection: TextDirection.rtl,
             ),
           ),
         ],

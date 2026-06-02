@@ -1,66 +1,91 @@
 import 'package:flutter/material.dart';
-import '../../../../core/extension/extension.dart';
-import '%D8%A7%D8%AD%D8%A7%D8%AF%D9%8A%D8%AB/ahadeth_page.dart';
-import '%D8%A7%D8%AF%D8%B9%D9%8A%D9%87/ad3ya_page.dart';
-import '%D8%A7%D8%B0%D9%83%D8%A7%D8%B1/azkar_of_books_page.dart';
-import '%D8%A7%D9%84%D8%AD%D8%AC%20%D9%88%D8%A7%D9%84%D8%B9%D9%85%D8%B1%D9%87/haj_and_3omra.dart';
-import '%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D9%87%20%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D9%87/sera_nabwya.dart';
-import '%D8%B1%D9%85%D8%B6%D8%A7%D9%86/rmdan_page.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
-import '../../../../core/extension/screen_utils.dart';
+import '../../../../config/routes/routes_name.dart';
+import '../../../../core/extension/extension.dart';
+import 'build_grid_book_tile.dart';
 
 class BuildOtherBooks extends StatelessWidget {
   const BuildOtherBooks({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: context.isMobile ? 2 : 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 0.9,
-      ),
-      itemCount: texts.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          borderRadius: BorderRadius.circular(8),
-          onTap: () {
-            context.push(widget: _pages(texts[index])[index]);
+    final items = _items(context);
+
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 0.95,
+        ),
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final item = items[index];
+            return BuildGridBookTile(
+              title: item.title,
+              icon: item.icon,
+              onTap: () => context.pushNamed(pageRoute: item.route),
+            ).animate(delay: (50 * index).ms).fadeIn(duration: 50.ms).scale(
+                  begin: const Offset(0.92, 0.92),
+                  end: const Offset(1, 1),
+                  duration: 50.ms,
+                );
           },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(),
-            ),
-            alignment: AlignmentDirectional.center,
-            child: Text(
-              texts[index],
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ),
-        );
-      },
+          childCount: items.length,
+        ),
+      ),
     );
+  }
+
+  List<_LibraryGridItem> _items(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      _LibraryGridItem(
+        title: l10n.ahadeth,
+        icon: Icons.auto_stories_rounded,
+        route: RoutesName.ahadethPage,
+      ),
+      _LibraryGridItem(
+        title: l10n.azkar,
+        icon: Icons.menu_book_rounded,
+        route: RoutesName.azkarPage,
+      ),
+      _LibraryGridItem(
+        title: l10n.ad3ya,
+        icon: Icons.favorite_rounded,
+        route: RoutesName.ad3yaPage,
+      ),
+      _LibraryGridItem(
+        title: l10n.hajj,
+        icon: Icons.mosque_rounded,
+        route: RoutesName.hajjPage,
+      ),
+      _LibraryGridItem(
+        title: l10n.seerah,
+        icon: Icons.history_edu_rounded,
+        route: RoutesName.seerahPage,
+      ),
+      _LibraryGridItem(
+        title: l10n.ramadan,
+        icon: Icons.nightlight_round_rounded,
+        route: RoutesName.ramadanPage,
+      ),
+    ];
   }
 }
 
-List<Widget> _pages(String title) => [
-      AhadethPage(title: title),
-      Ad3yaPage(title: title),
-      AzkarOfBooksPage(title: title),
-      HajAnd3omra(title: title),
-      SeraNabwya(title: title),
-      RmdanPage(title: title),
-    ];
+class _LibraryGridItem {
+  final String title;
 
-List<String> texts = [
-  'أحاديث',
-  'أدعيه',
-  'أذكار',
-  'الحج والعمره',
-  'السيره النبويه',
-  'رمضان',
-];
+  final IconData icon;
+  final String route;
+  const _LibraryGridItem({
+    required this.title,
+    required this.icon,
+    required this.route,
+  });
+}

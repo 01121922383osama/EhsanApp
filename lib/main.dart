@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
 import 'config/routes/routes.dart';
 import 'config/routes/routes_name.dart';
@@ -29,12 +29,26 @@ class QuranApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ChangeFonts(), lazy: true),
         BlocProvider(
-            create: (context) => AzkarCubit()..getZekrData(), lazy: true),
-        BlocProvider(create: (context) => ChangeLanguageCubit(), lazy: true),
-        BlocProvider(create: (context) => ThemeCubit(), lazy: true),
-        BlocProvider(create: (context) => AppCubit(), lazy: true),
+          create: (context) => ChangeFonts(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => AzkarCubit()..getZekrData(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => ChangeLanguageCubit(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => AppCubit(),
+          lazy: true,
+        ),
         BlocProvider(
           create: (context) => di.sl<PrayerCubit>()..getPrayerTime(),
         ),

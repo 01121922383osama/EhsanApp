@@ -49,6 +49,15 @@
     "popular": "Le populaire",
     "volume": "Niveau de volume",
     "speed": "Niveau de vitesse",
+    "addCustomZekr": "Ajouter un Zekr personnalisé",
+    "enterCustomZekr": "Entrez votre zekr personnalisé",
+    "cancel": "Annuler",
+    "add": "Ajouter",
+    "editCustomZekr": "Modifier le Zekr personnalisé",
+    "deleteCustomZekr": "Supprimer le Zekr personnalisé",
+    "deleteCustomZekrConfirm": "Êtes-vous sûr de vouloir supprimer ce zekr personnalisé ?",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
     "holyQuran": "Le Saint Coran",
     "tfsir": "Explication",
     "fajr": "Fajr",
@@ -69,6 +78,10 @@
     "jobTitleBilal": "Concepteur Ui / Ux",
     "descriptionBilal": "Ce texte est un exemple de texte qui peut être remplacé dans le même espace. Ce texte a été généré à partir du générateur de texte arabe, où vous pouvez générer un tel texte ou de nombreux autres textes en plus d''augmenter le nombre de lettres que l''application génère.",
     "prayerTimes": "Heures de prière",
+    "nextPrayer": "Prochaine prière",
+    "timeRemaining": "Temps restant",
+    "prayerPassed": "Terminé",
+    "currentPrayerPeriod": "Après {name}",
     "chooseZekr": "Choisissez la mention que vous souhaitez",
     "plzEnterSomeText": "Veuillez entrer du texte",
     "home": "Accueil",
@@ -77,5 +90,48 @@
     "checkInternet": "Verfiez votre connection internet!",
     "loading": "Chargement...",
     "tryAgain": "Essayer a nouveau",
-    "fontsize": "Taile de police"
+    "fontsize": "Taile de police",
+    "library": "Bibliotheque",
+    "ahadeth": "Ahadeth",
+    "azkar": "Azkar",
+    "ad3ya": "Ad3ya",
+    "hajj": "Hajj & Umrah",
+    "seerah": "Biographie prophétique",
+    "ramadan": "Ramadan",
+    "ahadith": "Ahadith",
+    "asmaaAllahTitle": "Beaux noms d''Allah",
+    "zekrTapHint": "Appuyez pour compter",
+    "zekrCompleted": "Terminé",
+    "zekrInProgress": "En cours",
+    "zekrNotStarted": "Pas commencé",
+    "zekrRepeatCount": "{current} / {total}",
+    "@zekrRepeatCount": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrSequence": "{current} sur {total}",
+    "@zekrSequence": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrCompletedSummary": "{done} sur {total} terminés",
+    "@zekrCompletedSummary": {
+        "placeholders": {
+            "done": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "elements": "éléments",
+    "search": "Rechercher",
+    "youtubeTitle": "Vidéos religieuses",
+    "youtubePoweredBy": "Propulsé par YouTube — contenu de chaînes publiques",
+    "youtubeNoVideos": "Aucune vidéo disponible pour le moment",
+    "youtubeOpenExternal": "Ouvrir dans YouTube",
+    "youtubeTapToPlay": "Appuyez pour lire dans l''app",
+    "youtubePlayInApp": "Réessayer",
+    "youtubePlayerFailed": "Impossible de charger le lecteur. Essayez YouTube ou un appareil réel"
 }

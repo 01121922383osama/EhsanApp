@@ -20,10 +20,11 @@ class PrayerTimeModel extends PrayerTimeEntity {
     );
   }
   static DateTime parseTime(String timeString) {
-    final List<String> parts = timeString.split(':');
-    final int hour = int.parse(parts[0]);
-    final int minute = int.parse(parts[1]);
-    return DateTime(2024, 1, 1, hour, minute);
+    final now = DateTime.now();
+    final parts = timeString.split(':');
+    final hour = int.parse(parts[0]);
+    final minute = int.parse(parts[1]);
+    return DateTime(now.year, now.month, now.day, hour, minute);
   }
 
   String formatTime(DateTime time) {

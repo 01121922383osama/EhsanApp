@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 import '../../../../../core/widgets/custom_appbar.dart';
 
 import '../../../../../core/utils/app_styles.dart';
@@ -18,11 +18,11 @@ class AzkarPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.azkar,
-          style: AppTextStyles.textStyleFont20,
+          style: AppTextStyles.textStyleFont20.copyWith(fontSize: 17),
         ),
         actions: [
           BuildIconBackWidget(
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.search_rounded, size: 22),
             onPressed: () {
               showSearch(
                 context: context,

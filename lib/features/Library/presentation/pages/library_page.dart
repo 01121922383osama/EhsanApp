@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/space_widget.dart';
@@ -10,24 +11,21 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overScroll) {
-          overScroll.disallowIndicator();
-          return false;
-        },
+    return Scaffold(
+      body: SafeArea(
         child: CustomScrollView(
-          primary: true,
           physics: const BouncingScrollPhysics(),
           slivers: [
-            const SpaceWidget(height: 15),
-            const BuildListBooks(),
             const SpaceWidget(height: 20),
+            const BuildListBooks(),
+            const SpaceWidget(height: 16),
             const BuildOtherBooks(),
             SpaceWidget(height: context.width / 4),
           ],
-        ),
+        ).animate().fadeIn(
+              duration: 50.ms,
+              curve: Curves.easeOut,
+            ),
       ),
     );
   }

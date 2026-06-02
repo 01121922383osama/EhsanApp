@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
-import '../../../../config/routes/routes_name.dart';
 import '../../../../core/extension/extension.dart';
+import '../../../Quran/presentation/pages/quran_page.dart';
 import 'build_list_widgtet.dart';
 
 class BuildListBooks extends StatelessWidget {
@@ -11,27 +11,22 @@ class BuildListBooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        [
           BuildListTileWidget(
             titlel: AppLocalizations.of(context)!.holyQuran,
-            trailing: const Icon(
-              CupertinoIcons.book,
+            trailing: Icon(
+              Icons.menu_book_rounded,
+              size: 32,
+              color: Theme.of(context).colorScheme.primary,
             ),
-            onTap: () {
-              context.pushNamed(pageRoute: RoutesName.quranPage);
-            },
+            onTap: () => context.push(widget: const QuranPage()),
           ),
-          BuildListTileWidget(
-            titlel: AppLocalizations.of(context)!.tfsir,
-            trailing: const Icon(
-              Icons.menu_book,
-            ),
-          ),
-        ],
+        ]
+            .animate(interval: 50.ms)
+            .fadeIn(duration: 50.ms)
+            .slideX(begin: 0.2, end: 0, duration: 50.ms),
       ),
     );
   }

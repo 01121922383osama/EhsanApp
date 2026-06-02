@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../core/extension/extension.dart';
-import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
 
+import '../../../../core/extension/extension.dart';
 import '../../../../core/widgets/build_leading_widget.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../../../Setting/presentation/cubit/ChangeFonts/change_fonts.dart';
 import '../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 import '../widgets/details_surah.dart';
 

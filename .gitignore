@@ -41,3 +41,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local API keys (copy from lib/core/constants/api_keys.example.dart)
+lib/core/constants/api_keys.dart

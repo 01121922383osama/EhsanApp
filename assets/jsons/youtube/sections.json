@@ -1,0 +1,108 @@
+{
+  "sections": [
+    {
+      "id": "quran_recitation",
+      "titleAr": "تلاوات قرآنية",
+      "titleEn": "Quranic Recitations",
+      "titleFr": "Récitations coraniques",
+      "icon": "auto_stories_rounded",
+      "playlistId": "PL9733F19A97E509A3",
+      "fallbackVideos": [
+        {
+          "id": "YE7E2HDb8RA",
+          "titleAr": "سورة الفاتحة - مشاري العفاسي",
+          "titleEn": "Surah Al-Fatiha - Mishary Alafasy",
+          "titleFr": "Sourate Al-Fatiha - Mishary Alafasy"
+        },
+        {
+          "id": "8IzSa_zwoZI",
+          "titleAr": "سورة يس - مشاري العفاسي",
+          "titleEn": "Surah Ya-Sin - Mishary Alafasy",
+          "titleFr": "Sourate Ya-Sin - Mishary Alafasy"
+        },
+        {
+          "id": "IEVJm5ab8Iw",
+          "titleAr": "سورة الرحمن - سعد الغامدي",
+          "titleEn": "Surah Ar-Rahman - Saad Al-Ghamdi",
+          "titleFr": "Sourate Ar-Rahman - Saad Al-Ghamdi"
+        }
+      ]
+    },
+    {
+      "id": "lectures",
+      "titleAr": "دروس ومحاضرات",
+      "titleEn": "Lessons & Lectures",
+      "titleFr": "Leçons et conférences",
+      "icon": "school_rounded",
+      "playlistId": "PL67C704035CA7B26D",
+      "fallbackVideos": [
+        {
+          "id": "T2k9rGSSlP0",
+          "titleAr": "تذكير إيماني - معنى التوحيد",
+          "titleEn": "Faith Reminder - Meaning of Tawheed",
+          "titleFr": "Rappel de foi - Le sens du Tawhid"
+        },
+        {
+          "id": "jQ962ArAjGs",
+          "titleAr": "فضل قراءة القرآن",
+          "titleEn": "Virtue of Reading the Quran",
+          "titleFr": "La vertu de la lecture du Coran"
+        }
+      ]
+    },
+    {
+      "id": "stories",
+      "titleAr": "قصص وعبر",
+      "titleEn": "Stories & Lessons",
+      "titleFr": "Histoires et leçons",
+      "icon": "history_edu_rounded",
+      "playlistId": "",
+      "fallbackVideos": [
+        {
+          "id": "dP7ZtqylTg0",
+          "titleAr": "قصة آدم عليه السلام",
+          "titleEn": "Story of Prophet Adam",
+          "titleFr": "Histoire du prophète Adam"
+        },
+        {
+          "id": "n13B9AhGGqs",
+          "titleAr": "قصة نوح عليه السلام",
+          "titleEn": "Story of Prophet Nuh",
+          "titleFr": "Histoire du prophète Nuh"
+        }
+      ]
+    },
+    {
+      "id": "azkar_duas",
+      "titleAr": "أذكار وأدعية",
+      "titleEn": "Azkar & Duas",
+      "titleFr": "Invocations et dhikr",
+      "icon": "volunteer_activism_rounded",
+      "playlistId": "",
+      "fallbackVideos": [
+        {
+          "id": "H-U0FFK_2vU",
+          "titleAr": "أذكار الصباح والمساء",
+          "titleEn": "Morning and Evening Azkar",
+          "titleFr": "Invocations du matin et du soir"
+        }
+      ]
+    },
+    {
+      "id": "kids",
+      "titleAr": "محتوى للأطفال",
+      "titleEn": "Content for Kids",
+      "titleFr": "Contenu pour enfants",
+      "icon": "child_care_rounded",
+      "playlistId": "",
+      "fallbackVideos": [
+        {
+          "id": "jQ962ArAjGs",
+          "titleAr": "سورة الملك - للأطفال",
+          "titleEn": "Surah Al-Mulk for Kids",
+          "titleFr": "Sourate Al-Mulk pour enfants"
+        }
+      ]
+    }
+  ]
+}

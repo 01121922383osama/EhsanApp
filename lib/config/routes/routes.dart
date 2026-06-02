@@ -15,6 +15,12 @@ import '../../features/home/presentation/pages/Azkar/azkar_page.dart';
 import '../../features/home/presentation/pages/Sebha/SebehCubit/sabeh_cubit.dart';
 import '../../features/home/presentation/pages/Sebha/sebha_page.dart';
 import '../../features/home/presentation/widgets/about_us.dart';
+import '../../features/Library/presentation/pages/ahadeth_page.dart';
+import '../../features/Library/presentation/pages/azkar_library_page.dart';
+import '../../features/Library/presentation/pages/ad3ya_page.dart';
+import '../../features/Library/presentation/pages/hajj_page.dart';
+import '../../features/Library/presentation/pages/seerah_page.dart';
+import '../../features/Library/presentation/pages/ramadan_page.dart';
 import '../Animations/slide_left.dart';
 import 'routes_name.dart';
 
@@ -54,6 +60,20 @@ class AppRoute {
           create: (context) => AsmaaHosnaCubit()..getData(),
           child: const AsmaaAllahPage(),
         ));
+        
+      // Library routes
+      case RoutesName.ahadethPage:
+        return SlideToLeft(page: const AhadethPage());
+      case RoutesName.azkarPage:
+        return SlideToLeft(page: const AzkarLibraryPage());
+      case RoutesName.ad3yaPage:
+        return SlideToLeft(page: const Ad3yaPage());
+      case RoutesName.hajjPage:
+        return SlideToLeft(page: const HajjPage());
+      case RoutesName.seerahPage:
+        return SlideToLeft(page: const SeerahPage());
+      case RoutesName.ramadanPage:
+        return SlideToLeft(page: const RamadanPage());
 
       default:
         return onUnknownRoute(settings)!;

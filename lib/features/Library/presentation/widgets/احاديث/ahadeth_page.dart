@@ -1,85 +1,73 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../../../Quran/presentation/widgets/leading_widget.dart';
+import 'package:free_lancer/l10n/app_localizations.dart';
+import '../../../data/models/category_model.dart';
+import '../../../data/services/library_service.dart';
+import '../base_category_page.dart';
 
-import '../../../../../core/widgets/custom_appbar.dart';
+class AhadethPage extends StatelessWidget {
+  const AhadethPage({super.key});
 
-class Hadith {
-  final String text;
-  Hadith({required this.text});
-  factory Hadith.fromJson(Map<String, dynamic> json) {
-    return Hadith(
-      text: json['text'],
+  @override
+  Widget build(BuildContext context) {
+    final libraryService = LibraryService();
+
+    return BaseCategoryPage(
+      title: AppLocalizations.of(context)!.ahadeth,
+      icon: Icons.auto_stories_rounded,
+      loadCategories: libraryService.getAhadethCategories,
+      buildDetailPage: (context, category) => AhadethDetailPage(category: category),
     );
   }
 }
 
-class AhadethPage extends StatelessWidget {
-  final String title;
-  const AhadethPage({super.key, required this.title});
+class AhadethDetailPage extends StatelessWidget {
+  final CategoryModel category;
 
-  Future<List<Hadith>> loadAhadith() async {
-    String jsonString =
-        await rootBundle.loadString('assets/jsons/ahadith/أحاديث عامة.json');
-
-    final List<dynamic> jsonData = json.decode(jsonString);
-    return jsonData.map((item) => Hadith.fromJson(item)).toList();
-  }
+  const AhadethDetailPage({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbar(
-        centerTitle: true,
-        title: Text(title),
-      ),
-      body: FutureBuilder<List<Hadith>>(
-        future: loadAhadith(),
-        builder: (BuildContext context, AsyncSnapshot<List<Hadith>> snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                'Error: ${snapshot.error}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+    return BaseCategoryDetailPage(
+      category: category,
+      buildItemWidget: (context, item) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            item.text,
+            style: const TextStyle(
+              fontSize: 18,
+              height: 1.5,
+            ),
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
+          ),
+          if (item.source != null && item.source!.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              'المصدر: ${item.source}',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
               ),
-            );
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            final List<Hadith> ahadith = snapshot.data ?? [];
-            return ListView.builder(
-              itemCount: ahadith.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: LeadingWidget(index: index),
-                  title: Card(
-                    elevation: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        ahadith[index].text,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          }
-        },
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+            ),
+          ],
+          if (item.description != null && item.description!.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              item.description!,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 14,
+                height: 1.4,
+              ),
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.right,
+            ),
+          ],
+        ],
       ),
     );
   }

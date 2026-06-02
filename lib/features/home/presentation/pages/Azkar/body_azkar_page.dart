@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Setting/presentation/cubit/Theme/theme_cubit.dart';
 
 import '../../../../../../core/extension/extension.dart';
-import '../../../../Quran/presentation/widgets/build_avatar_surah.dart';
+import '../../../../../../core/utils/app_durations.dart';
+import '../../widgets/home_feature_ui.dart';
 import 'cubit/azkar_cubit.dart';
 import 'details_of_zek.dart';
 
@@ -18,44 +19,32 @@ class BodyAzkarPage extends StatelessWidget {
           final azkar = state.azkar;
           return ListView.builder(
             physics: const BouncingScrollPhysics(),
+            padding: HomeFeatureUi.pagePadding,
             cacheExtent: 1000,
             itemCount: azkar.length,
             itemBuilder: (context, index) {
               final zekr = azkar[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  side: const BorderSide(),
-                ),
-                color: context.read<ThemeCubit>().state
-                    ? Colors.transparent
-                    : Colors.white,
-                child: ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  leading: BuildAvatarNumber(
-                    index: index,
-                  ),
-                  title: Text(zekr.category),
-                  onTap: () {
-                    context.push(
-                      widget: DetailsOfZekr(
-                        title: zekr.category,
-                        zekr: zekr.array,
-                      ),
-                    );
-                  },
-                ),
-              );
+              return HomeFeatureUi.categoryTile(
+                context: context,
+                index: index,
+                title: zekr.category,
+                onTap: () {
+                  context.push(
+                    widget: DetailsOfZekr(
+                      title: zekr.category,
+                      zekr: zekr.array,
+                    ),
+                  );
+                },
+              )
+                  .animate(delay: (30 * index).ms)
+                  .fadeIn(duration: AppDurations.animation)
+                  .slideX(begin: 0.04, end: 0, duration: AppDurations.animation);
             },
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
         }
+
+        return HomeFeatureUi.compactLoading();
       },
     );
   }

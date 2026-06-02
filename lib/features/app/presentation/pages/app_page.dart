@@ -10,6 +10,7 @@ import '../widgets/build_menu_button_bar_widget.dart';
 
 import '../../../Library/presentation/pages/library_page.dart';
 import '../../../Listen/presentation/pages/listen_page.dart';
+import '../../../Listen/presentation/widgets/quran_mini_player.dart';
 import '../../../Setting/presentation/pages/profile_page.dart';
 import '../../../home/presentation/pages/home_page.dart';
 import '../cubit/app_cubit.dart';
@@ -45,18 +46,25 @@ class AppPage extends StatelessWidget {
               buildMenu(context, state),
             ],
           ),
-          body: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (notification) {
-              notification.disallowIndicator();
-              return true;
-            },
-            child: PageView(
-              controller: context.read<AppCubit>().pageController,
-              onPageChanged: (value) {
-                context.read<AppCubit>().changeIndex(value);
-              },
-              children: _widgets,
-            ),
+          body: Column(
+            children: [
+              const QuranMiniPlayer(),
+              Expanded(
+                child: NotificationListener<OverscrollIndicatorNotification>(
+                  onNotification: (notification) {
+                    notification.disallowIndicator();
+                    return true;
+                  },
+                  child: PageView(
+                    controller: context.read<AppCubit>().pageController,
+                    onPageChanged: (value) {
+                      context.read<AppCubit>().changeIndex(value);
+                    },
+                    children: _widgets,
+                  ),
+                ),
+              ),
+            ],
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,

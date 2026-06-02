@@ -1,3 +1,16 @@
+buildscript {
+    ext.kotlin_version = "2.2.20"
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.11.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -5,12 +18,28 @@ allprojects {
     }
 }
 
-rootProject.buildDir = '../build'
+rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
-    project.evaluationDependsOn(':app')
+    project.evaluationDependsOn(":app")
+}
+subprojects { subproject ->
+    subproject.buildscript {
+        configurations.configureEach {
+            resolutionStrategy {
+                force "org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.20"
+                force "org.jetbrains.kotlin:kotlin-stdlib:2.2.20"
+                eachDependency { details ->
+                    if (details.requested.group == "org.jetbrains.kotlin") {
+                        details.useVersion "2.2.20"
+                        details.because "Align Kotlin compiler with dependencies (Flutter 3.32+)"
+                    }
+                }
+            }
+        }
+    }
 }
 
 tasks.register("clean", Delete) {

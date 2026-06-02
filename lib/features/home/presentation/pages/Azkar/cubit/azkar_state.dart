@@ -22,3 +22,8 @@ final class AzkarFailure extends AzkarState {
   final String error;
   const AzkarFailure({required this.error});
 }
+
+final class AzkarChangeIndex extends AzkarState {
+  final int index;
+  const AzkarChangeIndex({required this.index});
+}

@@ -10,25 +10,26 @@ class BuildAvatarNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        FittedBox(
-          alignment: AlignmentDirectional.center,
-          clipBehavior: Clip.none,
-          fit: BoxFit.scaleDown,
-          child: Text(
+    return RepaintBoundary(
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          SvgPicture.asset(
+            AssetsSvg.verse,
+            height: 35,
+            width: 35,
+            fit: BoxFit.contain,
+          ),
+          Text(
             '${index + 1}',
             style: const TextStyle(
               fontSize: 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ),
-        SvgPicture.asset(
-          AssetsSvg.verse,
-          height: 35,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

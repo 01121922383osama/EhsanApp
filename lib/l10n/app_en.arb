@@ -1,13 +1,13 @@
 {
     "appName": "Free Lancer",
     "welcomeBack": "Welcome Back",
-    "contentLoginPage": "We''re excited to have you back, can''t wait to see what you''ve been up to since you last logged in.",
+    "contentLoginPage": "We''re excited to have you back, we can''t wait to see what you''ve been up to since you last logged in.",
     "rememberMe": "Remember me",
-    "orSignInWith": "Or sign in with",
+    "orSignInWith": "Or Sign in with",
     "createAccount": "Create Account",
-    "contentRegisterPage": "Sign up now and start exploring all that our app has to offer. We''re excited to welcome you to our community!",
-    "privacy": "By logging, you agree to our Terms & Conditions and Privacy Policy.",
-    "haveAnAccount": "Already have an account? Sign Up",
+    "contentRegisterPage": "Register now and start exploring all that our app has to offer. We''re excited to welcome you to our community!",
+    "privacy": "By signing up, you agree to our Terms and Privacy Policy.",
+    "haveAnAccount": "Already have an account? Sign In",
     "next": "Next",
     "getStarted": "Get Started",
     "donthaveAnAccount": "Don''t have an account?",
@@ -19,7 +19,7 @@
     "forgotPassword": "Forgot Password?",
     "signIn": "Sign In",
     "signUp": "Sign Up",
-    "confirmNewPassword": "Confirm Password",
+    "confirmNewPassword": "Confirm New Password",
     "contentPassword": "Please take a few minutes to fill out your profile with as much detail as possible.",
     "emailOrPhoneNumber": "Email or Phone Number",
     "titleApp": "Ehsan App",
@@ -49,6 +49,15 @@
     "popular": "The Popular",
     "volume": "Volume Level",
     "speed": "Speed Level",
+    "addCustomZekr": "Add Custom Zekr",
+    "enterCustomZekr": "Enter your custom zekr",
+    "cancel": "Cancel",
+    "add": "Add",
+    "editCustomZekr": "Edit Custom Zekr",
+    "deleteCustomZekr": "Delete Custom Zekr",
+    "deleteCustomZekrConfirm": "Are you sure you want to delete this custom zekr?",
+    "save": "Save",
+    "delete": "Delete",
     "holyQuran": "The Holy Quran",
     "tfsir": "Explanation",
     "fajr": "Fajr",
@@ -69,6 +78,10 @@
     "jobTitleBilal": "Ui / Ux Designer",
     "descriptionBilal": "This text is an example of text that can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts in addition to increasing the number of letters that the application generates.",
     "prayerTimes": "Prayer Times",
+    "nextPrayer": "Next prayer",
+    "timeRemaining": "Time remaining",
+    "prayerPassed": "Done",
+    "currentPrayerPeriod": "After {name} prayer",
     "chooseZekr": "Choose the mention that you want",
     "plzEnterSomeText": "Please enter some text",
     "home": "Home",
@@ -77,5 +90,48 @@
     "checkInternet": "Check your internet connection!",
     "loading": "Loading...",
     "tryAgain": "Try Again.",
-    "fontsize": "FontSize"
+    "fontsize": "Font Size",
+    "library": "Library",
+    "ahadeth": "Ahadeth",
+    "azkar": "Azkar",
+    "ad3ya": "Ad3ya",
+    "hajj": "Hajj & Umrah",
+    "seerah": "Prophetic Biography",
+    "ramadan": "Ramadan",
+    "ahadith": "Ahadith",
+    "asmaaAllahTitle": "Beautiful Names of Allah",
+    "zekrTapHint": "Tap to count",
+    "zekrCompleted": "Completed",
+    "zekrInProgress": "In progress",
+    "zekrNotStarted": "Not started",
+    "zekrRepeatCount": "{current} / {total}",
+    "@zekrRepeatCount": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrSequence": "{current} of {total}",
+    "@zekrSequence": {
+        "placeholders": {
+            "current": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "zekrCompletedSummary": "{done} of {total} completed",
+    "@zekrCompletedSummary": {
+        "placeholders": {
+            "done": { "type": "int" },
+            "total": { "type": "int" }
+        }
+    },
+    "elements": "elements",
+    "search": "Search",
+    "youtubeTitle": "Religious Videos",
+    "youtubePoweredBy": "Powered by YouTube — content from public channels",
+    "youtubeNoVideos": "No videos available right now",
+    "youtubeOpenExternal": "Open in YouTube",
+    "youtubeTapToPlay": "Tap to play in app",
+    "youtubePlayInApp": "Try again",
+    "youtubePlayerFailed": "Could not load the player. Try opening in YouTube or use a real device"
 }
